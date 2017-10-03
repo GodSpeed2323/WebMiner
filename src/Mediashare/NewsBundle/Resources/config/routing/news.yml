@@ -1,0 +1,8 @@
+news:
+    path:     /
+    defaults: { _controller: "MediashareNewsBundle:Default:index" }
+
+news_show:
+    path:     /{id}/{slug}
+    defaults: { _controller: "MediashareNewsBundle:Default:show" }
+

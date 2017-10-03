@@ -1,0 +1,6 @@
+mediashare_user_user:
+    resource: "@MediashareUserBundle/Resources/config/routing/admin_user.yml"
+    prefix:   /admin/user
+mediashare_user_profile:
+    resource: "@MediashareUserBundle/Resources/config/routing/user.yml"
+    prefix:   /profile

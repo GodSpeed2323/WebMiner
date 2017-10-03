@@ -1,0 +1,96 @@
+{% extends 'MediashareAppBundle::base.html.twig' %}
+{% block content %}
+
+ <div class="miner">
+    <div class="row">
+        <div class="box">
+            <h3>Point(s)/s</h3>
+            <h2 id="hashes-per-second">0</h2>
+        </div>
+        <div class="box">
+            <h3>threads</h3>
+            <h2>
+                <span id="threads">2</span>
+                <span id="thread-add" class="action"> + </span>
+                <span class="divide"> / </span>
+                <span id="thread-remove" class="action"> - </span>
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="box">
+            <h3>Points</h3>
+            <h2 id="accepted-shares">0</h2>
+        </div>
+        <div class="box">
+            <h3>Auto Threads</h3>
+            <div class="autoThreads">
+                <input type="checkbox" value="None" id="autoThreads" name="check" />
+                <label for="autoThreads"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <input class="text" type="text" id="username" value="{{ username }}" disabled="true">
+    </div>
+
+      <div class="content-wrapper">
+         <a id="start" class="action-link line-animation">
+        <div id="start_text" class="link-content">Start Mining</div>
+        <div class="gradient-animation"></div>
+      </a>
+      </div>
+
+       
+
+    <div class="content-wrapper" style="display:flex;">
+        <a id="chartsLeft" class="action-link curtain-link black" >
+            <div  class="link-content"><</div>
+            <div class="curtain"></div>
+        </a>
+        <a id="chartsRight" class="action-link curtain-link black" >
+            <div  class="link-content">></div>
+            <div class="curtain"></div>
+        </a>
+
+  <!-- <h2><span class="action" >< </span> <span class="action" id="chartsRight"> ></span></h2> -->
+</div>
+<div class="row">
+    <canvas id="donut-canvas" class="stats" width="100%" height="100%"></canvas>
+</div>
+<div class="row">
+    <canvas id="barchart-canvas" class="stats" width="100%" height="100%"></canvas>
+</div>
+
+    
+    <div class="list">
+        <h3>Top 10</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th>User</th>
+                    <th class="num">Accepted Points</th>
+                </tr>
+            </thead>
+            <tbody id="toplist">
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="content-wrapper">
+  <a class="action-link curtain-link red" href="/logout">
+    <div class="link-content">Logout</div>
+    <div class="curtain"></div>
+  </a>
+</div>
+
+{% block classement %}
+    {{ render(controller('MediashareAppBundle:Default:update')) }}
+{% endblock %}
+{% block minerjs %}
+    {{ render(controller('MediashareAppBundle:Default:minerjs')) }}
+{% endblock %}
+{% endblock %}

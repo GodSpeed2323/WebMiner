@@ -1,0 +1,11 @@
+categories:
+     path:   /{id}/{slug}
+     defaults: {_controller:"MediashareProductBundle:Default:categories", slug: default_slug }
+
+categories_sub:
+     path : /{slugParent}/{id}/{slug}
+     defaults: {_controller:"MediashareProductBundle:Default:categories", slugParent: default_slug }
+
+category_show:
+      path : /{slugParent}/{id}/{slug}/show
+      defaults: {_controller:"MediashareProductBundle:Default:showCategory", slug: default_slug }

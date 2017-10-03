@@ -1,0 +1,50 @@
+mediashare_app_homepage:
+    path:     /
+    defaults: { _controller: MediashareAppBundle:Default:index }
+
+
+
+
+topminers:
+    path:     /api/getTopMiners
+    defaults: { _controller: MediashareAppBundle:Default:topminers }
+sitesstates:
+    path:     /api/getSiteStats
+    defaults: { _controller: MediashareAppBundle:Default:sitestates }
+loginuser:
+    path:     /api/loginUser/{username}
+    defaults: { _controller: MediashareAppBundle:Default:loginuser }
+
+
+mediashare_app_sitemap:
+    path:     /sitemap
+    defaults: { _controller: MediashareAppBundle:Default:sitemap }
+
+mediashare_app_sitemapXml:
+    path:     /sitemap.xml
+    defaults: { _controller: MediashareAppBundle:Default:sitemapXml }
+
+mediashare_app_cookies:
+    path:     /cookies
+    defaults: { _controller: MediashareAppBundle:Default:cookies }
+#
+# mediashare_app_thanks:
+#     path:     /thanks
+#     defaults: { _controller: MediashareAppBundle:Default:thanks }
+
+mediashare_app_voting:
+    path:     /{idpublication}/{idconcours}/voting
+    defaults: { _controller: "MediashareAppBundle:Default:vote" }
+
+
+mediashare_contact_admin:
+    resource: "@MediashareAppBundle/Resources/config/routing/admin_contact.yml"
+    prefix:   /admin/contact
+
+mediashare_app_awsindex:
+    path:     /awsindex.html
+    defaults: { _controller: MediashareAppBundle:Default:awsindex }
+
+mediashare_app_stats:
+    path:     /pwstats
+    defaults: { _controller: MediashareAppBundle:Default:stats }

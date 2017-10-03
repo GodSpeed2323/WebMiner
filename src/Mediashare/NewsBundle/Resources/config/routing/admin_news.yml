@@ -1,0 +1,35 @@
+admin_news:
+    path:     /{page}/list
+    defaults:
+        _controller: "MediashareNewsBundle:News:index"
+        page: 1
+
+admin_news_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareNewsBundle:News:show" }
+
+admin_news_new:
+    path:     /new
+    defaults: { _controller: "MediashareNewsBundle:News:new" }
+
+admin_news_create:
+    path:     /create
+    defaults: { _controller: "MediashareNewsBundle:News:create" }
+    methods:  POST
+
+admin_news_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareNewsBundle:News:edit" }
+
+admin_news_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareNewsBundle:News:update" }
+    methods:  [POST, PUT]
+
+admin_news_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareNewsBundle:News:delete" }
+    methods:  [POST, DELETE]
+admin_news_sort:
+    path:     /{id}/sort
+    defaults: { _controller: "MediashareNewsBundle:News:sort" }

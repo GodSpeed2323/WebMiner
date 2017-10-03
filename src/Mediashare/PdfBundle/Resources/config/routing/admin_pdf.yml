@@ -1,0 +1,30 @@
+admin_pdf:
+    path:     /
+    defaults: { _controller: "MediasharePdfBundle:Pdf:index" }
+
+admin_pdf_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediasharePdfBundle:Pdf:show" }
+
+admin_pdf_new:
+    path:     /new
+    defaults: { _controller: "MediasharePdfBundle:Pdf:new" }
+
+admin_pdf_create:
+    path:     /create
+    defaults: { _controller: "MediasharePdfBundle:Pdf:create" }
+    methods:  POST
+
+admin_pdf_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediasharePdfBundle:Pdf:edit" }
+
+admin_pdf_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediasharePdfBundle:Pdf:update" }
+    methods:  [POST, PUT]
+
+admin_pdf_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediasharePdfBundle:Pdf:delete" }
+#    methods:  [POST, DELETE]

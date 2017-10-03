@@ -1,0 +1,15 @@
+{% extends 'MediashareAppBundle::base.html.twig' %}
+{% block content %}
+Listing des news :</br>
+<ul>
+    {% for item in listnews %}
+        <li>
+            ID : {{ item.id }}</br>
+            Titre : {{ item.title }}</br>
+            Description : {{ item.content }}</br>
+            Date de création : le {{ item.createDate|date('d-m-Y') }}</br>
+            <a href="{{ path('news_show',  { 'id': item.id , 'slug': item.slug}) }}">Voir le détail</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

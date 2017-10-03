@@ -1,0 +1,9 @@
+mediashare_referencing_keywords:
+    resource: "@MediashareReferencingBundle/Resources/config/routing/admin_keywords.yml"
+    prefix:   /admin/keywords
+
+mediashare_referencing_referencing:
+    resource: "@MediashareReferencingBundle/Resources/config/routing/admin_referencing.yml"
+    prefix:   /admin/referencing
+
+

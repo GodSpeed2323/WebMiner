@@ -1,0 +1,55 @@
+{% block content %}
+
+<style type="text/css">
+    html {
+  background: url(https://38.media.tumblr.com/546c0cd48d71f210f9b67a389003790d/tumblr_neq0yw9rMA1tm16jjo1_500.gif) no-repeat center center fixed;
+  background-size: cover;
+}
+h1 {
+  font-size: 16em;
+  margin: .2em .5em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0px;
+}
+h2 {
+  font-size: 1.7em;
+  margin: .2em .5em;
+  color: rgba(255, 255, 255, 0.6);
+}
+a {
+    color: bisque;
+}
+div.error {
+  position: absolute;
+  top: 30%;
+  margin-top: -8em;
+  width: 100%;
+  text-align: center;
+}
+
+</style>
+<div class="error">
+  <h1>404</h1>
+   <h2>
+  {% if app.request.attributes.get('_route_params')|length > 0 %}
+  {% set url = app.request.uri|replace({'http://': '', '/': '-'}) %}
+    {% for item in app.request.attributes.get('_route_params') %}
+    {% set path = item %}
+      {{ app.request.uri }}
+    {% endfor %}
+  {% endif %}
+  </h2>
+  <h2>Page Not Found</h2> 
+  <h2>Contacter notre équipe pour toute demande d'assistance 
+    {% if app.request.attributes.get('_route_params')|length > 0 %}
+      <a href="http://support.mediashare.fr/report/{{ url }}">
+      {% else %}
+      <a href="http://support.mediashare.fr/report">
+    {% endif %}
+    Report Bug - Support.Mediashare.fr</a></h2>
+  
+ 
+ 
+</div>
+
+{% endblock %}

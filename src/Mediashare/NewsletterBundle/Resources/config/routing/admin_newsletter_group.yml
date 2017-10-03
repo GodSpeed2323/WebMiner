@@ -1,0 +1,30 @@
+admin_newsletter_group:
+    path:     /
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:index" }
+
+admin_newsletter_group_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:show" }
+
+admin_newsletter_group_new:
+    path:     /new
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:new" }
+
+admin_newsletter_group_create:
+    path:     /create
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:create" }
+    methods:  POST
+
+admin_newsletter_group_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:edit" }
+
+admin_newsletter_group_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:update" }
+    methods:  [POST, PUT]
+
+admin_newsletter_group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterGroup:delete" }
+    methods:  [POST, DELETE]

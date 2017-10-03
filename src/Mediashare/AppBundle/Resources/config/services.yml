@@ -1,0 +1,10 @@
+services:
+#    mediashare_app.example:
+#        class: Mediashare\AppBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    Mediashare.twig.app_extension:
+        class: Mediashare\AppBundle\Twig\AppExtension
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+        tags:
+            - { name: twig.extension }

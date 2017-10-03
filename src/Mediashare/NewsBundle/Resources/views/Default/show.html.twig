@@ -1,0 +1,28 @@
+{% extends 'MediashareAppBundle::base.html.twig' %}
+{% block content %}
+<table>
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ detailnews.id }}</td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td>{{ detailnews.title }}</td>
+    </tr>
+    <tr>
+        <th>Content</th>
+        <td>{{ detailnews.content }}</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>{{ detailnews.createDate|date('Y-m-d H:i:s') }}</td>
+    </tr>
+    <tr>
+        <th></th>
+        <td><a href="{{ path('news') }}">Retour</a></td>
+    </tr>
+
+    </tbody>
+</table>
+{% endblock %}

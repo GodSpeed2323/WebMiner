@@ -1,0 +1,7 @@
+Listing des Produits :</br>
+<ul>
+    {% for item in product %}
+        <li>{{ item.id }} - {{ item.title }} | Id-Category : {{ item.category.id }} - Titre Category : {{ item.category.title }}
+            <a href="{{ path('product_show',  { 'id': item.id, 'slug': item.slug }) }}">Voir</a> </li>
+    {% endfor %}
+</ul>

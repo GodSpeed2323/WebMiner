@@ -1,0 +1,10 @@
+product:
+    path:     /
+    defaults: { _controller: "MediashareProductBundle:Default:index" }
+
+
+
+product_show:
+    path:     /{id}/{slug}
+    defaults: { _controller: "MediashareProductBundle:Default:show" }
+

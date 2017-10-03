@@ -1,0 +1,30 @@
+admin_referencing:
+    path:     /
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:index" }
+
+admin_referencing_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:show" }
+
+admin_referencing_new:
+    path:     /new
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:new" }
+
+admin_referencing_create:
+    path:     /create
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:create" }
+    methods:  POST
+
+admin_referencing_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:edit" }
+
+admin_referencing_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:update" }
+    methods:  [POST, PUT]
+
+admin_referencing_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareReferencingBundle:Referencing:delete" }
+

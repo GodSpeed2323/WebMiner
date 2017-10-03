@@ -1,0 +1,19 @@
+mediashare_newsletter_newsletter:
+    resource: "@MediashareNewsletterBundle/Resources/config/routing/admin_newsletter.yml"
+    prefix:   /admin/newsletter
+
+mediashare_newsletter_newsletter_abonnes:
+    resource: "@MediashareNewsletterBundle/Resources/config/routing/admin_newsletter_mail.yml"
+    prefix:   /admin/newsletter/abonnes
+
+mediashare_newsletter_newsletter_group:
+    resource: "@MediashareNewsletterBundle/Resources/config/routing/admin_newsletter_group.yml"
+    prefix:   /admin/newsletter/group
+
+mediashare_newsletter_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MediashareNewsletterBundle:Default:index }
+
+mediashare_newsletter:
+    resource: "@MediashareNewsletterBundle/Resources/config/routing/newsletter.yml"
+    prefix:   /newsletter

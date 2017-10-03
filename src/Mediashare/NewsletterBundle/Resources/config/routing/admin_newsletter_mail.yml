@@ -1,0 +1,30 @@
+admin_newsletter_mail:
+    path:     /
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:index" }
+
+admin_newsletter_mail_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:show" }
+
+admin_newsletter_mail_new:
+    path:     /new
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:new" }
+
+admin_newsletter_mail_create:
+    path:     /create
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:create" }
+    methods:  POST
+
+admin_newsletter_mail_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:edit" }
+
+admin_newsletter_mail_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:update" }
+    methods:  [POST, PUT]
+
+admin_newsletter_mail_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareNewsletterBundle:NewsletterMail:delete" }
+    methods:  [POST, DELETE]

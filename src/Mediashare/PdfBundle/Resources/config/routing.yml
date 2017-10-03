@@ -1,0 +1,4 @@
+mediashare_pdf_pdf:
+    resource: "@MediasharePdfBundle/Resources/config/routing/admin_pdf.yml"
+    prefix:   /admin/pdf
+

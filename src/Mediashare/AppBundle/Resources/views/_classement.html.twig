@@ -1,0 +1,48 @@
+<section class="wrapper" style="z-index:-1;">
+    <!-- Row title -->
+    <main class="rowed title">
+      <ul>
+        <li>Username
+          <span class="small">#Classement</span>
+        </li>
+
+        <li>Points</li>
+        <li>Points/secondes</li>
+        <li>Time</li>
+
+      </ul>
+    </main>
+    {% for item in entity %}
+     
+          {% if loop.index <= 3 %}
+          <article class="rowed green_list">
+          {% elseif loop.index <= 6 %}
+            <article class="rowed yellow_list">
+          {% elseif loop.index <= 9 %}
+            <article class="rowed red_list">
+          {% else %}
+            <article class="rowed red_list">
+          {% endif %}
+
+
+          <ul>
+            <li>
+              <a href="#">{{ item.username }} </a>
+              <span class="small">#{{ item.classement }} {% if item.connected == true %}<a style="color:#52d29a;">(Online)<a/>{% endif %}</span>
+            </li>
+            <li>
+                {{ item.points }} points
+            </li>
+            <li>12 points/s</li>
+            <li>{{ item.createDate|date("d/m/Y")  }}</li>
+          </ul>
+          <ul class="more-content">
+            <li>
+              <p></p>
+             
+
+            </li>
+          </ul>
+        </article>
+    {% endfor %}
+  </section>

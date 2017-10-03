@@ -1,0 +1,11 @@
+mediashare_admin_admin_menu:
+    resource: "@MediashareAdminBundle/Resources/config/routing/menu.yml"
+    prefix:   /menu
+
+mediashare_admin_homepage:
+    path:     /
+    defaults: { _controller: MediashareAdminBundle:Default:index }
+
+mediashare_admin_update:
+    path:     /upload
+    defaults: { _controller: MediashareAdminBundle:Default:upload }

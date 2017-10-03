@@ -1,0 +1,33 @@
+{% extends 'MediashareAppBundle::base.html.twig' %} {% block content %}
+    <div class="row pages" id="listing">
+        {% include('MediashareAppBundle::_aside.html.twig') %}
+        <section class="columns large-8 medium-6 small-12">
+            <h1 title="">{{ parent.title }}</h1>
+            <hr class="separator">
+            <p class="paragraphe mb_50">{{ parent.description|striptags }}</p>
+            {% for category in categories %}
+                <article class="columns large-6 medium-12 small-12 listing_article">
+                    <div class="prix">
+                        <p>44€</p>
+                    </div>
+                    <div class="content">
+                        <h2 title="">{{ category.title }}</h2>
+                        <p>{{ category.description|striptags }}</p>
+                        <div class="boutons">
+                            {% if category.childrens|length > 0 %}
+                                <a class="see"
+                                   href="{{ path('categories_sub', {slugParent: category.slugParent, id: category.id, slug: category.slug}) }}"
+                                   title="">Voir</a>
+                            {% else %}
+                                <a class="see" href="{{ path('category_show',{slugParent: category.slugParent, id: category.id, slug: category.slug}) }}" title="">Voir le produit</a>
+                                <a class="add" href="" title="">Ajouter au panier</a>
+                            {% endif %}
+                            <hr class="clear">
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </section>
+    </div>
+{% endblock %}

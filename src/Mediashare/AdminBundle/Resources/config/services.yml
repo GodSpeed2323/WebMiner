@@ -1,0 +1,4 @@
+services:
+#    mediashare_admin.example:
+#        class: Mediashare\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

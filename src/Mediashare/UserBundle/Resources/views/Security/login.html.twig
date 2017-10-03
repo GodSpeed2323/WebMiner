@@ -1,0 +1,41 @@
+{% extends "MediashareUserBundle::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error|trim('.')|trans({}, 'FOSUserBundle') }}</div>
+    {% endif %}
+
+
+
+    <div class="login-wrap">
+      <h2>Connexion</h2>
+
+      <form action="{{ path("fos_user_security_check") }}" method="POST" class="form">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+
+            <input style="margin-left: 10%;" type="text" id="username" name="_username" class="form-control" value="{{ last_username }}"
+                   required="required" placeholder="Username"/>
+            <input style="margin-left: 10%;" type="password" id="password" name="_password" class="form-control" required="required" placeholder="Password"/>
+
+        <div class="checkbox">
+            <input style="margin-left:-5%;" type="checkbox" id="remember_me" name="_remember_me" value="on"/><p>{{ 'security.login.remember_me'|trans }}</p>
+        </div>
+        <hr class="clear">
+
+
+          <div>
+            <button type="submit" id="_submit" name="_submit" class="btn btn-primary pull-center"
+                   value="{{ 'security.login.submit'|trans }}">Connexion</button>
+          </div>
+      </form>
+    </div>
+    <div class="login-wrap2">
+     <h2>Qu'est ce que c'est ?</h2>
+         <p>Le principe est simple, vous n'avez pas d'argent ? Vous souhaitez participé activement au déveleppoment du serveur ? Suffit de vous inscrires sur ce site et commençer à Miner ! Un ranking est disponnible avec un tableau du Top 10 des Miners, à voir dans le future faire gagné des prix/rangs pour les participants les plus actifs ! <br>
+      WebMiner est un moyen de contribuer au développement du server discord <a target="_blank" href="https://discord.gg/3Pf4w3x">l'Escale</a>. Au moment où vous lancez WebMiner, votre machine va miner du <a target="_blank" href="https://getmonero.org/">Monero</a> une cryptomonnaie. Le principe est simple vous donnez un peu de votre temps machine pour résoudre des calculs ce qui génère de la cryptomonnaie. En récompence nous vous offrons un ranking spécial et des clefs steams (bientôt).</p>
+     <p><em>Vous devez désactivé AdBlock afin que le javascript soit bien activé.</em></p>
+    </div>
+{% endblock fos_user_content %}

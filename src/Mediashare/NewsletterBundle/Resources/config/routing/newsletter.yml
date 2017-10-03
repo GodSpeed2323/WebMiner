@@ -1,0 +1,9 @@
+newsletter:
+    path:     /
+    defaults: { _controller: "MediashareNewsletterBundle:Default:newsletter" }
+
+newsletter_remove:
+    path:     /abonne/delete
+    defaults: { _controller: "MediashareNewsletterBundle:Default:remove" }
+    requirements:
+        id: \d+
