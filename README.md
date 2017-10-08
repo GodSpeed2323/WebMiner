@@ -11,7 +11,7 @@ Si vous souhaitez participer activement au déveleppoment du serveur mais que vo
 
 Il suffit simplement de vous inscrire et de cliquer sur le button Start Mining pour commençer à miner. Un classement des mineurs est disponible plus bas, les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
 
-#### [Demo](http://webminer.slote.me)
+#### [Demo](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/3Pf4w3x)
 
 ## Getting Started
 
