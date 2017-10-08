@@ -22,10 +22,10 @@ class DefaultController extends Controller
     {
         // Page Principal
         $username = $this->getUser()->getUsername();
-        
+
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array(), array('classement' => 'ASC'));
-  
+
 
         return $this->render('MediashareAppBundle:Default:index.html.twig', array(
             'username' => $username,
@@ -34,7 +34,7 @@ class DefaultController extends Controller
     }
 
     public function updateAction()
-    {   
+    {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array(), array('classement' => 'ASC'));
 
@@ -43,7 +43,7 @@ class DefaultController extends Controller
         ));
     }
     public function connectedAction()
-    {   
+    {
         // Miner Connected
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('connected' => 1), array('classement' => 'ASC'));
@@ -53,7 +53,7 @@ class DefaultController extends Controller
         ));
     }
     public function minerjsAction()
-    {   
+    {
         // SiteKey Miner Js
         $publickey = $this->getUser()->getPublickey();
         if (!$publickey) {
@@ -71,13 +71,12 @@ class DefaultController extends Controller
 
     public function rankedAction($total, $value)
     {
-        
+
     }
     public function topminersAction()
-    {   
-
+    {
         $privatekey = $this->getUser()->getPrivatekey();
-        $today = date("mdHi"); 
+        $today = date("mdHi");
 
         if (!$privatekey) {
             $privatekey = 'UEYZDnaSATmGtwne5vYjBfJBa9loLHTv';
@@ -102,7 +101,7 @@ class DefaultController extends Controller
             $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('username' => $username));
             foreach ($entity as $key => $value) {
                 if ($value->getPoints() < $total) {
-                    if ($value->getTimer() < $today+5) {
+                    if ($value->getTimer() < $today-5) {
                         $this->online($today);
                     }
                     $value->setUpdated(true);
@@ -116,7 +115,6 @@ class DefaultController extends Controller
                     $value->setUpdated(false);
                     $value->setClassement($loop);
                 }
-                        
                         $user_rank = $value->getRanked();
 
                         if ($total > 100000 && $user_rank < 1) {
@@ -141,17 +139,11 @@ class DefaultController extends Controller
                         }
                     $em->persist($value);
                     $em->flush();
-            }  
-
-
+            }
         }
         echo json_encode($response);
         curl_close($curl);
-
-       
-        
         return $this->render('MediashareAppBundle::zero.html.twig');
-
     }
     public function online($today)
     {
@@ -161,7 +153,7 @@ class DefaultController extends Controller
             $login->setConnected(true);
             $login->setTimer($today);
         $em1->persist($login);
-        $em1->flush();   
+        $em1->flush();
 
     }
     public function sitestatesAction()
@@ -189,7 +181,7 @@ class DefaultController extends Controller
             $Server->setPointsTotal($points_total);
             $Server->setXmrTotal($xmr_total);
         $em->persist($Server);
-        $em->flush(); 
+        $em->flush();
 
         $this->connectedAction();
         return $this->render('MediashareAppBundle::zero.html.twig');
@@ -198,7 +190,7 @@ class DefaultController extends Controller
     {
         return $this->render('MediashareAppBundle::zero.html.twig');
     }
-     
+
     public function pageNotFoundAction()
     {
         return $this->render('MediashareAppBundle:Default:error.html.twig');
