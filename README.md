@@ -57,6 +57,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ### Donate
 My BitCoin Address : 1NFoAx12XazvYZH7G8vZfo8ibyFoJiQc3v
+
 WebMiner : http://WebMiner.slote.me
 
 ## Versioning
