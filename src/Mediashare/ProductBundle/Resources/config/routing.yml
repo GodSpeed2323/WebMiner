@@ -1,7 +1,0 @@
-mediashare_product_category_admin:
-    resource: "@MediashareProductBundle/Resources/config/routing/admin_category.yml"
-    prefix:   /Gestion/Concours
-
-mediashare_product_product_admin:
-    resource: "@MediashareProductBundle/Resources/config/routing/admin_product.yml"
-    prefix:   /Gestion/Publication
