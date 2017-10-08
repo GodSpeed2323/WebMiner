@@ -1,15 +1,18 @@
 # WebMiner
 
-### Qu'est-ce que c'est ?
-WebMiner est un moyen de contribuer au développement du server Discord l'Escale. Au moment où vous lancez WebMiner, votre machine mine du Monero, une cryptomonnaie. Le principe est simple : vous supportez le serveur en donnant du temps de votre machine.
+## Qu'est-ce que c'est ?
 
-### Pourquoi Participer ?
+WebMiner est un moyen de contribuer au développement de votre Serveur Discord. Cela comprend un site internet sur le qu'elle la communauté devra se connecter pour commencer à Miner du [Monero](). Le Minage utilise le CPU & le Réseau via le Javascript exécuter par le site. Un Bot est installé sur votre Serveur Discord pour permettre l'affichage des Statistiques de la Mine(Classements, Mineurs Online, Total Miner ect...).  
 
-Si vous souhaitez participer activement au déveleppoment du serveur mais que vous n'avez pas d'argent, vous pourrez contribuer de cette manière ! En récompense de votre fabuleux effort vous gagnerez des points pour le Serveur Discord, et pourrez ainsi évoluer dans le Ranking du serveur.
+## Pourquoi WebMiner ?
 
-### Comment ça Marche ?
+Si vous souhaitez participer activement au développement du serveur mais que vous n'avez pas d'argent, vous pourrez contribuer de cette manière ! WebMiner peut rapporté jusqu'à 1€/jours pour un total de 1 000points/s (environ 13 Mineurs), cela peut permettre de proposé des lots conséquents pour les Mineurs les plus investie !
 
-Il suffit simplement de vous inscrire et de cliquer sur le button Start Mining pour commençer à miner. Un classement des mineurs est disponible plus bas, les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
+## Comment ça Marche ?
+
+Au moment où vous lancez WebMiner, votre machine mine du Monero, une cryptomonnaie. Le principe est simple : vous devez vous inscrire et cliquer sur le button Start Mining pour commencer à miner.
+En récompense de leurs efforts, les Mineurs gagnent des points pour le Serveur Discord, et pourront ainsi évoluer dans le Ranking du serveur.
+Un classement des mineurs est disponible sur le site & le bot (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
 
 #### [Demo](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/3Pf4w3x)
 
