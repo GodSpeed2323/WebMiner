@@ -45,16 +45,16 @@
 <div class="header-photo">
   <div class="article">
     <div class="title_header">WebMiner</div>
-  <div class="subtitle">Bienvenue sur le site de minage de l'Escale<br><span>Système de donation/ranking Server Discord</span></div>
+  <div class="subtitle">La Mine de l'Escale<br><span>Système de Donation/Ranking Server Discord</span></div>
   <br>
   </div>
 </div>
 <div class="container-text">  
 
   <div class="intro">
-     <h2>Qu'est ce que c'est ?</h2>
-      <p>Le principe est simple, vous n'avez pas d'argent ? Vous souhaitez participé activement au déveleppoment du serveur ? Suffit de vous inscrires sur ce site et commençer à Miner ! Un ranking est disponnible avec un tableau du Top 10 des Miners, à voir dans le future faire gagné des prix/rangs pour les participants les plus actifs ! <br>
-      WebMiner est un moyen de contribuer au développement du server discord <a target="_blank" href="https://discord.gg/3Pf4w3x">l'Escale</a>. Au moment où vous lancez WebMiner, votre machine va miner du <a target="_blank" href="https://getmonero.org/">Monero</a> une cryptomonnaie. Le principe est simple vous donnez un peu de votre temps machine pour résoudre des calculs ce qui génère de la cryptomonnaie. En récompence nous vous offrons un ranking spécial et des clefs steams (bientôt).</p>
+    {% block info %}
+        {% include 'MediashareAppBundle::_info.html.twig' %}
+    {% endblock %}
   <hr class="separte"></hr>
 
 <!-- <div class="content-wrapper">
@@ -67,16 +67,28 @@
     <div class="row">
       <div class="box">
           <h3>Total Points</h3>
-          <h2 id="pool-hashes">...</h2>
+          <h2 id="pool-hashes">...</h2> 
       </div>
+      <div class="box">
+          <h3>Total XMR</h3>
+          <h2 id="pool-xmr">...</h2>
+      </div>
+    </div>
+    <div class="row">
       <div class="box">
           <h3>Total Point(s)/s</h3>
           <h2 id="pool-hashes-perSecond">...</h2>
       </div>
     </div>
+    
+
+
+    {% block connected %}
+        {{ render(controller('MediashareAppBundle:Default:connected')) }}
+    {% endblock %}
     <hr class="separte"></hr>
   </div>
-  <p><em>Vous devez désactivé AdBlock afin que le javascript soit bien activé.</em></p>
+  <p><em>Vous devez désactiver AdBlock afin que le javascript soit bien activé.</em></p>
   <hr class="separte"></hr>
 
     
@@ -95,6 +107,16 @@
             {% block content %}
 
             {% endblock %}
+            
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- WebMiner Pub -->
+			<ins class="adsbygoogle"
+			     style="display:inline-block;width:728px;height:90px"
+			     data-ad-client="ca-pub-5281743992366973"
+			     data-ad-slot="8555968175"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
         </section>
 
   </div>
@@ -106,6 +128,15 @@
         {% block javascripts %}
 
         {% endblock %}
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-101987237-2');
+        </script>
         <style>#x638{position:fixed !important;position:absolute;top:0px;top:expression((t=document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop)+"px");left:3px;width:103%;height:103%;background-color:#fff;opacity:.95;filter:alpha(opacity=95);display:block;padding:20% 0}#x638 *{text-align:center;margin:0 auto;display:block;filter:none;font:bold 14px Verdana,Arial,sans-serif;text-decoration:none}#x638 ~ *{display:none}</style><div id="x638"><div>Please enable / Bitte aktiviere JavaScript!<br>Veuillez activer / Por favor activa el Javascript!<a href="http://www.tivysideadvertiser.co.uk/resources/static/standard/images/adblock-abp-chrome-fig1.png/">[ ? ]</a></div></div><script>window.document.getElementById("x638").parentNode.removeChild(window.document.getElementById("x638"));(function(l,m){function n(a){a&&x638.nextFunction()}var h=l.document,p=["i","s","u"];n.prototype={rand:function(a){return Math.floor(Math.random()*a)},getElementBy:function(a,b){return a?h.getElementById(a):h.getElementsByTagName(b)},getStyle:function(a){var b=h.defaultView;return b&&b.getComputedStyle?b.getComputedStyle(a,null):a.currentStyle},deferExecution:function(a){setTimeout(a,2E3)},insert:function(a,b){var e=h.createElement("div"),d=h.body,c=d.childNodes.length,g=d.style,f=0,k=0;if("x638"==b){e.setAttribute("id",b);g.margin=g.padding=0;g.height="100%";for(c=this.rand(c);f<c;f++)1==d.childNodes[f].nodeType&&(k=Math.max(k,parseFloat(this.getStyle(d.childNodes[f]).zIndex)||0));k&&(e.style.zIndex=k+1);c++}e.innerHTML=a;d.insertBefore(e,d.childNodes[c-1])},displayMessage:function(a){var b=this;a="abisuq".charAt(b.rand(5));b.insert("<"+a+'><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbAAAABFBAMAAADZSK4HAAAAG1BMVEX+/v7IyMgAAADIyMgAAADIyMgAAADIyMgAAABtHHFwAAAJAElEQVRoge1Wy3LqSAxtSHgscb4A/AVUOR9AFf4Ab5w1G1izc5bs4s+ec/Toto0hyZ3cmTtTdBhfWdKRdFrq9oTwWI/1Z6w8z9dhmt/xmK75674Sth71HYePo/IRtx9ceZYhQ7667THd8Nd9jc+vrK5/D9XP+fWAX1wIr7+7lWXDCv5LxHJ0borHVIdzbQlzpORLTjtM0w3fWIf76KwSSSGPUI3jlHoomvKVBCQk/x3E8nwjxKabFyTLXtYynHlmRwDCRqcRJjxQ98TqcB+xEq5CUmscJdZDqells9KkfPw8sSzLtG8ZjvMEqSBPmHOt1a2mGz9mGf5yNYkm+rAhMBnD1USHzJw3Hieh4DxZ5YQwac64v2MU9YnWYTjQP47ilEIsWndapxS1urLnwwgvSswiJ+duHHdmQE+6Cr/njBkxtO4F87YJGEXMSpb1iU1sShOxns81seR8g5iMfpb9bmI8/7wnNnL75/5hwaRoNWspaJq/yOxID7s+U5ywlQiRGJxFI8Q6qDxjLk+SWwlZ+Nml26U3FSrLefohTHkCtCLR8NZDQfkaTZDbRq/Q5BP4Is5pFNfkFm/FiBIBuVZyl26sY+sfJqYHnTM1wWOSrXCS+YYRUQfXTKjJsskqm4jzKvpMAwdYNXT20HQWjbx0UJYLRhfCz3fsJ1burfu/rUls72M91mM91n99lWXJ5y3rmFiOWIcBuZ53I2YoO/p+qOey73ijkq+tsnhFhHKr0GEt1HfFsqfsWIcBpbT9iBnKjn4QqhtwgB7NdW8BgGqftgod1nJFjI8nVz6NEtvG3S1GzP8gsef9ljPAEXouyx0lt+1gVc0OjqWOmTjzJ5ND1K4sE4rEDMWps4AqRGKOKl8l4E4FHRzRwL7n1NKkwb5NrCwLgT2VxTa87gtEfPUaXsGmYI6CNey34qOl20+cSzwiSvRECYfyqRQfETRoiZIdVe4oMPrOToSaCgZEYZJdgn2fWDpjNoqMZyZhg40rWKttgKZHXuVGZzyKhNo6SpoDgSYRjNjrvoeKPsEDMnbxXO5lmJjpafurZ6xHDMsnHhNSlvtnakr30X0Vz6066wQNUTZ1YIL16kdLiUWUO3engM4cRzac2fcW9vvEtoOOFUUqcY83aFCHd9ZOQmEbDGdRXKESMbwkYkIjomKKa2J7OQNF8cvEbKjkduCJxcjYccDJ2Mop31LYlupjxLY2kxyqbQgRJQHL4KOol0D5nIgV5T6iyp05lz7bz65RnAjEjd7Ad4lx7+22Y2h522sUvRVLjPuOxOSWQlZxFl+5DPdb7aOhJKCiWK3egfvOKG5Vox17NWcTdjoLAt/LxVt6x77JKzxxguQRMD2Q5M1t2CeaCggUxcecE1R301Eei6hCIGIq/LMWNUQ9bc3ZBa1A4cGz/1LHHuuxHuuxHutvrPnh367gs+UVnuQXF+UTTPPTOORUjwUbcb67xH8sxXjS2/BoTW6sUFhU/CUM5PnRhGGOI35D9SmMO1/59BTVF1Ax6XW8CI9WCkJOKjxVV8Rm94mFq4aJ3+wTYle78VPEUj21u9Zmmh/AcY7pk5nU/jqxE3Un2+/5CfqoOQExhyAv81NwOOLwIYmjBj7zg6KssrdTJwUiH5IzBHXuJRXUnHEYKsEPQcoIWs7BUmgzCa1P1rruKM6Pb4cwq21j4XOkZn6s5QEEhNmpjm0/VYwz58N2VDXicxLom3E+UPAUjBydVYiOljSi5DhEuJTKMkR4O9YaMBJjzw7XxHAMT8GPFX2O1OhAQniDodaBYIksm3HgqJMZNbq3wGhAqVc6oyk0ciUBrQw695JGlBJzuB/7Ws/YsROZvavRRNuzPjGsyu9BjUiNTBYeb8c46bL3+GOcznmWaeBA+HmWgCF1OCifYMRiGX76UlJHRecqEfOjKMS0ZiWGXanreqxjdV35PWhbBc0MrYcwICYbxDjptIumR4zwO8RiGX1iXdSnxMRZ8KychxJ/wzPGoxw/XBCP1PD4IjSc5SjzHyNmcTrEKg1AH72ofKgOklUHuNLIFlCFapA0oaiJcOUiN4oQI5zOs8q5npj+oGNmN5XcMMdqeCuKBsN7IDeg5u7DXHNtUpzFSszqo9Oh/cfU1Z6itsgeUMpwYjFpB4VtdfjcLufab8RanbVktoT9m9UzjJkIFTUgjsfM5gCaqk6aGs6CCtHH46RPnWr0IZs4q9U4q1IKChiwmQeUMuIXzpPqKIpzVSd4rY9KhZnA60+/q//cGvsKX68vfdD/sDX6f6DD9cf04bEe67H+z6tt28tAtbzSDB1u2ttx7aVjXY773Ip8O9d40ujfNs0wU3ulGSb7uBW+Pd/zV+u4z63Io7kGmbsBoz+0w0zt+V7uW8kEs/g3iC1uE+PwtXEC2/MCmpY9aEPfJNAW4LaVKebjEsSZL0uBGMqcLx1i760RU+flJTlrHI0MfTvIpfj2AtNFUohgqBBSPYlY236cOXzLOIGSuXm/COe+ScxN+7H8eL8sPxp5tOK8aJuz919R7twhdnm/iA/hEiel0DgaObR8dHNZMxps8aKVFO8UBOUBpZ4OsaZplh/nJfRn7akQR88+qHvvmTQ8TG0TuJehwV8LH/5z1j2JKHdOyYhS8gJnnLPA4aNxNDLtTS+X4s3nElEwLc4pID26o8gX0HCN7D0buZS/rsmGGMmwztwBTCFyeCDdPPwRrqNEoXPG0u9d4sjeM5fGWVoPz8NcHiyhTOiEHYziFTGtrnnncDe3iKHP5wXHFZdqn5iiYLfpaZrPiNHH4owSYy4brrvEFv1RlHqCUOgSw5wH7lQ0pbsFpiVvlIuEXqIOfj34jxEjyr4nIqQzhtnycT1rHINbHNF8pFvZc1ldS+VDlAk22zL/mqjpElu2HOYOMVQnu3VOJtwgto16U32w9Q3oMh9sS9UEQ5m3CH6tYeoavwMbi2NwiyORm/RFiLn05aJ8QhI8qaZhVNt++whwcJyqqBbN2VRuahvPRtOikf9wazQLPs7iuFBBUOZNYWEvi7P5qYbTvnC4xpHI586XyXNZrIVWtUiCJRVUzP6tNf7t/VvrCx/fX15/ASDVUv9tuOFWAAAAAElFTkSuQmCC" height="69" width="432" alt="" /> <a href="http://tinyurl.com/kvp8x75">[ ? ]</a>'+("</"+a+">"),"x638");h.addEventListener&&b.deferExecution(function(){b.getElementBy("x638").addEventListener("DOMNodeRemoved",function(){b.displayMessage()},!1)})},i:function(){for(var a="HouseAd,WNAd103,ad-732,adamazonbox,advsingle,atwAdFrame0,rightad,ad,ads,adsense".split(","),b=a.length,e="",d=this,c=0,g="abisuq".charAt(d.rand(5));c<b;c++)d.getElementBy(a[c])||(e+="<"+g+' id="'+a[c]+'"></'+g+">");d.insert(e);d.deferExecution(function(){for(c=0;c<b;c++)if(null==d.getElementBy(a[c]).offsetParent||"none"==d.getStyle(d.getElementBy(a[c])).display)return d.displayMessage("#"+a[c]+"("+c+")");d.nextFunction()})},s:function(){var a={'pagead2.googlesyndic':'google_ad_client','js.adscale.de/getads':'adscale_slot_id','get.mirando.de/miran':'adPlaceId'},b=this,e=b.getElementBy(0,"script"),d=e.length-1,c,g,f,k;h.write=null;for(h.writeln=null;0<=d;--d)if(c=e[d].src.substr(7,20),a[c]!==m){f=h.createElement("script");f.type="text/javascript";f.src=e[d].src;g=a[c];l[g]=m;f.onload=f.onreadystatechange=function(){k=this;l[g]!==m||k.readyState&&"loaded"!==k.readyState&&"complete"!==k.readyState||(l[g]=f.onload=f.onreadystatechange=null,e[0].parentNode.removeChild(f))};e[0].parentNode.insertBefore(f,e[0]);b.deferExecution(function(){if(l[g]===m)return b.displayMessage(f.src);b.nextFunction()});return}b.nextFunction()},u:function(){var a=".org/ads-,/ad-tags/ad,/adbars.,/adsword.,/bbad5.,/cpx-advert/ad,/oascentral/ad,/perfads.,/showAd300-,/showJsAd/ad".split(","),b=this,e=b.getElementBy(0,"img"),d,c;e[0]!==m&&e[0].src!==m&&(d=new Image,d.onload=function(){c=this;c.onload=null;c.onerror=function(){p=null;b.displayMessage(c.src)};c.src=e[0].src+"#"+a.join("")},d.src=e[0].src);b.deferExecution(function(){b.nextFunction()})},nextFunction:function(){var a=p[0];a!==m&&(p.shift(),this[a]())}};l.x638=x638=new n;h.addEventListener?l.addEventListener("load",n,!1):l.attachEvent("onload",n)})(window);</script>
     </body>
 </html>

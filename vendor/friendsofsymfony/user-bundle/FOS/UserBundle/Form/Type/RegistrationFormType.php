@@ -39,8 +39,8 @@ class RegistrationFormType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation','attr' => array('placeholder' => 'Password *')),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
-            ->add('publickey', 'text', array('attr' => array('placeholder' => 'qiitf8zlomSEfJkQUJhUogqz95AUoLvE')))
-            ->add('privatekey', 'text', array('attr' => array('placeholder' => '(Private Key)')))
+            // ->add('publickey', 'text', array('required' => false,'attr' => array('placeholder' => 'qiitf8zlomSEfJkQUJhUogqz95AUoLvE')))
+            // ->add('privatekey', 'text', array('required' => false,'attr' => array('placeholder' => '(Private Key)')))
         ;
     }
 

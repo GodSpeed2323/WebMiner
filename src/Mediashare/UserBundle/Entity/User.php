@@ -52,6 +52,16 @@ class User extends BaseUser
     protected $connected;
 
     /**
+     * @ORM\Column(type="integer", name="ranked", nullable=true)
+     */
+    protected $ranked;
+    
+    /**
+     * @ORM\Column(type="boolean", name="rankedupdated", nullable=true)
+     */
+    protected $rankedupdated;
+
+    /**
      * @ORM\Column(type="integer", name="timer", nullable=true)
      */
     protected $timer;
@@ -391,5 +401,52 @@ class User extends BaseUser
     public function getPrivatekey()
     {
         return $this->privatekey;
+    }
+
+
+    /**
+     * Set ranked
+     *
+     * @param integer $ranked
+     * @return User
+     */
+    public function setRanked($ranked)
+    {
+        $this->ranked = $ranked;
+
+        return $this;
+    }
+
+    /**
+     * Get ranked
+     *
+     * @return integer 
+     */
+    public function getRanked()
+    {
+        return $this->ranked;
+    }
+
+    /**
+     * Set rankedupdated
+     *
+     * @param boolean $rankedupdated
+     * @return User
+     */
+    public function setRankedupdated($rankedupdated)
+    {
+        $this->rankedupdated = $rankedupdated;
+
+        return $this;
+    }
+
+    /**
+     * Get rankedupdated
+     *
+     * @return boolean 
+     */
+    public function getRankedupdated()
+    {
+        return $this->rankedupdated;
     }
 }

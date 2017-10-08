@@ -67,6 +67,7 @@ $(function() {
 
         $.get("api/getSiteStats", function(response) {
             response = $.parseJSON(response);
+            $('#pool-xmr').text(response['xmrPending'].toLocaleString());
             $('#pool-hashes').text(response['hashesTotal'].toLocaleString());
             $('#pool-hashes-perSecond').text(response['hashesPerSecond'].toFixed(1));
         });
@@ -143,7 +144,7 @@ $(function() {
             $('#username').prop("disabled", true);
             miner.setNumThreads(threads);
             miner.setAutoThreadsEnabled($('#autoThreads').prop('checked'));
-            miner.start();
+            miner.start(CoinHive.FORCE_EXCLUSIVE_TAB);
             stopLogger();
             startLogger();
             console.log('miner started');
@@ -192,7 +193,7 @@ $(function() {
         },
         title: {
             display: true,
-            text: 'Submitted Shares Distribution'
+            text: 'Top Miners'
         },
         animation: {
             animateScale: true,

@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Mediashare\AdminBundle\MediashareAdminBundle(),
             new Mediashare\UserBundle\MediashareUserBundle(),
             new Mediashare\NewsBundle\MediashareNewsBundle(),
-            new Mediashare\ProductBundle\MediashareProductBundle(),
             new Mediashare\GedBundle\MediashareGedBundle(),
             new Mediashare\ReferencingBundle\MediashareReferencingBundle(),
             new Mediashare\NewsletterBundle\MediashareNewsletterBundle(),

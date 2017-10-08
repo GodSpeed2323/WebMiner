@@ -27,7 +27,7 @@ security:
         # - { path: ^/admin/Concours, role: ROLE_ADMIN }
         - { path: ^/Gestion/Publication/list, role: ROLE_SUPER_ADMIN }
         - { path: ^/Gestion/Publication, role: ROLE_USER }
-        - { path: ^/admin/, role: ROLE_USER }
+        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
         - { path: ^/, role: ROLE_USER }
         # - { path: ^/Gestion/Publication/new, role: ROLE_USER }
         # - { path: ^/Gestion/Publication/edit, role: ROLE_USER }

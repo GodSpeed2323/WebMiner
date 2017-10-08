@@ -1,20 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
-
-
 <div class="login-wrap">
   <h2>Register</h2>
-
   <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form">
-      {{ form_widget(form) }}
-      <div>
-          <button type="submit" value="{{ 'registration.submit'|trans }}">Submit</button>
-      </div>
+    {{ form_widget(form) }}
+    <div>
+      <button type="submit" value="{{ 'registration.submit'|trans }}">Submit</button>
+    </div>
   </form>
 </div>
 <div class="login-wrap2">
-  <h2>Qu'est ce que c'est ?</h2>
-     <p>Le principe est simple, vous n'avez pas d'argent ? Vous souhaitez participé activement au déveleppoment du serveur ? Suffit de vous inscrires sur ce site et commençer à Miner ! Un ranking est disponnible avec un tableau du Top 10 des Miners, à voir dans le future faire gagné des prix/rangs pour les participants les plus actifs ! <br>
-      WebMiner est un moyen de contribuer au développement du server discord <a target="_blank" href="https://discord.gg/3Pf4w3x">l'Escale</a>. Au moment où vous lancez WebMiner, votre machine va miner du <a target="_blank" href="https://getmonero.org/">Monero</a> une cryptomonnaie. Le principe est simple vous donnez un peu de votre temps machine pour résoudre des calculs ce qui génère de la cryptomonnaie. En récompence nous vous offrons un ranking spécial et des clefs steams (bientôt).</p>
-     <p><em>Vous devez désactivé AdBlock afin que le javascript soit bien activé.</em></p>
+ <div class="intro">
+    {% block info %}
+        {% include 'MediashareAppBundle::_info.html.twig' %}
+    {% endblock %}
 </div>

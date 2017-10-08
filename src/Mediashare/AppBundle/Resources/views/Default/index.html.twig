@@ -1,6 +1,5 @@
 {% extends 'MediashareAppBundle::base.html.twig' %}
 {% block content %}
-
  <div class="miner">
     <div class="row">
         <div class="box">
@@ -37,7 +36,7 @@
     </div>
 
       <div class="content-wrapper">
-         <a id="start" class="action-link line-animation">
+        <a id="start" class="action-link line-animation">
         <div id="start_text" class="link-content">Start Mining</div>
         <div class="gradient-animation"></div>
       </a>
@@ -66,7 +65,7 @@
 
     
     <div class="list">
-        <h3>Top 10</h3>
+        <h3>Top Miners</h3>
         <table>
             <thead>
                 <tr>
@@ -80,16 +79,14 @@
         </table>
     </div>
 </div>
-<div class="content-wrapper">
+<!-- <div class="content-wrapper">
   <a class="action-link curtain-link red" href="/logout">
     <div class="link-content">Logout</div>
     <div class="curtain"></div>
   </a>
-</div>
+</div> -->
+<!-- <iframe src="https://discordapp.com/widget?id=357217327378333708&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe> -->
 
-{% block classement %}
-    {{ render(controller('MediashareAppBundle:Default:update')) }}
-{% endblock %}
 {% block minerjs %}
     {{ render(controller('MediashareAppBundle:Default:minerjs')) }}
 {% endblock %}
