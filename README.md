@@ -14,7 +14,7 @@ Au moment où vous lancez WebMiner, votre machine mine du Monero, une cryptomonn
 En récompense de leurs efforts, les Mineurs gagnent des points pour le Serveur Discord, et pourront ainsi évoluer dans le Ranking du serveur.
 Un classement des mineurs est disponible sur le site & le bot (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
 
-#### [Demo](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/3Pf4w3x)
+#### [Demo](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/NKSwDgK)
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ Import sql Db [Db_WebMiner](web/Db_WebMiner)
 ## Contact
 * [Discord]
   * Name : L'Escale
-  * Url : https://discord.gg/vehad4f
+  * Url : https://discord.gg/NKSwDgK
 
 * [Irc]
   * Host : irc.slote.me
