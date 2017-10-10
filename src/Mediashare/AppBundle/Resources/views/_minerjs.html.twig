@@ -10,11 +10,27 @@ $(function() {
     var doughtCanvas = $("#donut-canvas").toggle();
     var barChart;
     var barChartCanvas = $("#barchart-canvas");
+    
     var siteKey = "{{ sitekey }}"; //Change to your address
+    var connected = "{{ connected }}";
+    var nextprogress = "{{ nextprogress }}";
+    var ranked = "{{ ranked }}";
+    var points_total = "{{ points_total }}";
+    var progress = 100*points_total/nextprogress;
+
+    var colorInc = 100 / 3;
     var hashingChart;
     var miners;
     var charts = [barChartCanvas, doughtCanvas];
     var selectedChart = 0;
+
+updateConnected();
+//$('#progress').text(progress.toLocaleString());
+$("#percent-box").val(progress);
+$(".progress .percent").text(progress.toFixed(0) + "%");
+$('#nextprogress').text(nextprogress.toLocaleString());
+$('#points_total').text(points_total.toLocaleString());
+$('#ranked').html(ranked).text();
 
     function htmlEncode(value) {
         return $('<div/>').text(value).html();
@@ -70,11 +86,21 @@ $(function() {
             $('#pool-xmr').text(response['xmrPending'].toLocaleString());
             $('#pool-hashes').text(response['hashesTotal'].toLocaleString());
             $('#pool-hashes-perSecond').text(response['hashesPerSecond'].toFixed(1));
-        });
+             
+            
+            });
     }
-
-
-
+    function htmlUnescape(str){
+    return str
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+}
+    function updateConnected() {
+        $(".online").html(htmlUnescape(connected)).text();
+    }
     setInterval(updateStats, 10000);
 
     function startLogger() {
@@ -84,8 +110,47 @@ $(function() {
             var acceptedHashes = miner.getAcceptedHashes();
             $('#hashes-per-second').text(hashesPerSecond.toFixed(1));
             $('#accepted-shares').text(acceptedHashes.toLocaleString());
+            $('#points_total').text(acceptedHashes.toLocaleString());
             threads = miner.getNumThreads();
             $('#threads').text(threads);
+            $('#nextprogress').text(nextprogress.toLocaleString());
+        
+        
+            var progress2 = 100*acceptedHashes/nextprogress;
+            console.log(progress2);
+            if(progress != ""
+              && !isNaN(progress2)
+              && progress2 <= 100
+              && progress2 >= 0)
+            {
+              var valOrig = progress2;
+              var roundedNumber = Math.round(valOrig);
+              progressbar = 100 - progress2;
+              if(valOrig == 0 | valOrig == null)
+              {
+                $("#percent-box").val(0);
+                $(".progress .percent").text(0 + "%");
+              }
+              else $(".progress .percent").text(roundedNumber + "%");
+              
+              $(".progress").parent().removeClass();
+              $(".progress .water").css("top", progressbar + "%");
+              
+              if(valOrig < colorInc * 1)
+                $(".progress").parent().addClass("red progress_bar");
+              else if(valOrig < colorInc * 2)
+                $(".progress").parent().addClass("orange progress_bar");
+              else
+                $(".progress").parent().addClass("green progress_bar");
+            }
+            else
+            {
+              $(".progress").parent().removeClass();
+              $(".progress").parent().addClass("green progress_bar");
+              $(".progress .water").css("top", 0 - 0 + "%");
+              $(".progress .percent").text(0 + "%");
+              $("#percent-box").val("");
+            }  
         }, 1000);
 
         hashingChart = setInterval(function() {
@@ -221,7 +286,7 @@ $(function() {
 
 
     var barChartOptions = {
-        label: 'Hashes',
+        label: 'Points',
         elements: {
             line: {
                 tension: 0, // disables bezier curves
@@ -251,8 +316,8 @@ $(function() {
     var barChartData = {
         labels: [],
         datasets: [{
-            label: "Hashes/s",
-            backgroundColor: "green",
+            label: "Points/s",
+            backgroundColor: "#34FF0F",
             data: []
         }],
     };

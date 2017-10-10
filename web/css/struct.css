@@ -14,7 +14,7 @@ body {
   z-index: 2;
   position: relative;
   text-align: center;
-  background: url("http://www.wabicorp.com/wp-content/uploads/2015/09/Underground-Mining-The-Role-and-Characteristics-of-Mine-Cages.jpg");
+  background: url("https://vignette4.wikia.nocookie.net/steamtradingcards/images/b/bf/Planet_Alcatraz_Background_Coal_mine.jpg/revision/latest?cb=20140807180230");
   background-size: cover;
   background-position: 50% 0%;
 }
@@ -120,6 +120,7 @@ a {
   text-decoration: none;
   -webkit-transition: all 0.35s;
   transition: all 0.35s;
+  color: #75c0c7;
 }
 .content-wrapper {
   /*margin: 100px auto;*/
@@ -139,6 +140,7 @@ a {
   padding: 20px 50px;
   overflow: hidden;
   max-width: 200px;
+  background-color: #3b3d41;
 }
 .action-link .link-content {
   position: relative;

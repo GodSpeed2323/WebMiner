@@ -42,9 +42,14 @@ class User extends BaseUser
     protected $firstName;
 
     /**
-     * @ORM\Column(type="boolean", name="updated", nullable=true)
+     * @ORM\Column(type="string", name="progress", nullable=true)
      */
-    protected $updated;
+    protected $progress;
+
+    /**
+     * @ORM\Column(type="string", name="nextprogress", nullable=true)
+     */
+    protected $nextprogress;
 
     /**
      * @ORM\Column(type="boolean", name="connected", nullable=true)
@@ -77,13 +82,9 @@ class User extends BaseUser
     protected $classement;
 
     /**
-     * @ORM\Column(type="string", name="publickey", length=255, nullable=true)
+     * @ORM\Column(type="integer", name="config", nullable=true)
      */
-    protected $publickey;
-    /**
-     * @ORM\Column(type="string", name="privatekey", length=255, nullable=true)
-     */
-    protected $privatekey;
+    protected $config;
 
     /**
      * @ORM\Column(type="string", name="last_name", length=255, nullable=true)
@@ -287,28 +288,7 @@ class User extends BaseUser
         return $this->classement;
     }
 
-    /**
-     * Set updated
-     *
-     * @param boolean $updated
-     * @return User
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
-     * Get updated
-     *
-     * @return boolean 
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
+   
 
     /**
      * Set connected
@@ -358,50 +338,28 @@ class User extends BaseUser
 
 
     /**
-     * Set publickey
+     * Set config
      *
-     * @param string $publickey
+     * @param integer $config
      * @return User
      */
-    public function setPublickey($publickey)
+    public function setConfig($config)
     {
-        $this->publickey = $publickey;
+        $this->config = $config;
 
         return $this;
     }
 
     /**
-     * Get publickey
+     * Get config
      *
-     * @return string 
+     * @return integer 
      */
-    public function getPublickey()
+    public function getConfig()
     {
-        return $this->publickey;
+        return $this->config;
     }
 
-    /**
-     * Set privatekey
-     *
-     * @param string $privatekey
-     * @return User
-     */
-    public function setPrivatekey($privatekey)
-    {
-        $this->privatekey = $privatekey;
-
-        return $this;
-    }
-
-    /**
-     * Get privatekey
-     *
-     * @return string 
-     */
-    public function getPrivatekey()
-    {
-        return $this->privatekey;
-    }
 
 
     /**
@@ -448,5 +406,51 @@ class User extends BaseUser
     public function getRankedupdated()
     {
         return $this->rankedupdated;
+    }
+
+    /**
+     * Set progress
+     *
+     * @param string $progress
+     * @return User
+     */
+    public function setProgress($progress)
+    {
+        $this->progress = $progress;
+
+        return $this;
+    }
+
+    /**
+     * Get progress
+     *
+     * @return string 
+     */
+    public function getProgress()
+    {
+        return $this->progress;
+    }
+
+    /**
+     * Set nextprogress
+     *
+     * @param string $nextprogress
+     * @return User
+     */
+    public function setNextprogress($nextprogress)
+    {
+        $this->nextprogress = $nextprogress;
+
+        return $this;
+    }
+
+    /**
+     * Get nextprogress
+     *
+     * @return string 
+     */
+    public function getNextprogress()
+    {
+        return $this->nextprogress;
     }
 }

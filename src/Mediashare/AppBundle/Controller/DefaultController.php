@@ -5,6 +5,7 @@ namespace Mediashare\AppBundle\Controller;
 use Doctrine\Common\Persistence\Mapping\MappingException;
 use Mediashare\AppBundle\Entity\Contact;
 use Mediashare\AppBundle\Entity\Server;
+use Mediashare\AppBundle\Entity\Config;
 use Mediashare\AppBundle\Form\ContactType;
 use Mediashare\UserBundle\Entity\User;
 use Mediashare\AppBundle\Sitemap\Url;
@@ -55,27 +56,50 @@ class DefaultController extends Controller
     public function minerjsAction()
     {
         // SiteKey Miner Js
-        $publickey = $this->getUser()->getPublickey();
-        if (!$publickey) {
-            $publickey = 'qiitf8zlomSEfJkQUJhUogqz95AUoLvE';
-        }
-        $privatekey = $this->getUser()->getPrivatekey();
-        if (!$privatekey) {
-            $privatekey = 'UEYZDnaSATmGtwne5vYjBfJBa9loLHTv';
-        }
+        $id_config = $this->getUser()->getConfig();
+        $id_user = $this->getUser()->getId();
+        $user_rank = $this->getUser()->getRanked();
+        $total = $this->getUser()->getPoints();
+        $progress = $this->getUser()->getProgress();
+        $nextprogress = $this->getUser()->getNextprogress();
 
+        if ($id_config == null) {
+            $id_config = 1;
+        }
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->getRepository('MediashareAppBundle:Config')->find($id_config);
+        $publickey =$config->getPublicKey();
+        
+        $connected = $em->getRepository('MediashareUserBundle:User')->findBy(array('connected' => 1), array('classement' => 'ASC'));
+        $msg_connected[] = "";
+        foreach ($connected as $key => $value) {
+            $msg_connected[] = " <a>".$value->getUsername()."</a> |";
+        }
+        $msg_connected = join('',$msg_connected);
+
+        $user = $em->getRepository('MediashareUserBundle:User')->find($id_user);
+        
+        
         return $this->render('MediashareAppBundle::_minerjs.html.twig', array(
             'sitekey' => $publickey,
+            'connected' => $msg_connected,
+            'progress' => $progress,
+            'nextprogress' => $nextprogress,
+            'ranked' => $user_rank,
+            'points_total' => $total,
         ));
     }
 
-    public function rankedAction($total, $value)
-    {
-
-    }
     public function topminersAction()
     {
-        $privatekey = $this->getUser()->getPrivatekey();
+        $id_config = $this->getUser()->getConfig();
+        if ($id_config == null) {
+            $id_config = 1;
+        }
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->getRepository('MediashareAppBundle:Config')->find($id_config);
+        $privatekey =$config->getPrivateKey();
+
         $today = date("mdHi");
 
         if (!$privatekey) {
@@ -97,57 +121,76 @@ class DefaultController extends Controller
           $total = htmlentities($values['total']);
           $loop = $loop+1;
           $response[$values['name']] = htmlentities($values['total']);
-            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('username' => $username));
             foreach ($entity as $key => $value) {
                 if ($value->getPoints() < $total) {
-                    if ($value->getTimer() < $today-5) {
-                        $this->online($today);
-                    }
-                    $value->setUpdated(true);
-                    $value->setTimer($today);
+                    $this->online($today, $value);
+                    //$value->setUpdated(true);
+
                     $value->setPoints($total);
                     $value->setClassement($loop);
-                }else{
-                    if ($value->getTimer() < $today-5) {
-                        $value->setConnected(false);
-                    }
-                    $value->setUpdated(false);
-                    $value->setClassement($loop);
-                }
-                        $user_rank = $value->getRanked();
 
-                        if ($total > 100000 && $user_rank < 1) {
-                            $value->setRanked(1);
-                            $value->setRankedupdated(true);
+                }
+                if ($value->getPoints() >= $total) {
+                    if ($value->getTimer() <= $today-2) {
+                        $value->setConnected(0);
+                    }
+                    //$value->setUpdated(false);
+                    $value->setClassement($loop);
+                }       
+
+
+                $user_rank = $value->getRanked();
+                $base = 1000000;
+                if ($user_rank == null | $user_rank == 0) {
+                    if ($total < $base) {
+                        $user_rank = 0;
+                        $progress = 100*$total/$base;
+                        $value->setProgress($progress);
+                        $value->setNextprogress($base);
+                        $value->setRanked(0);
+                        $value->setRankedupdated(false);
+                        
+                        
+                    }else{
+                        $user_rank = 1;
+                    }
+                }
+                if ($total > $base) {
+                        $i=2;
+                        while ($i <= 20) {
+                        if ($total > $base*2) {
+                            $base = $base*2;
+                            if ($user_rank < $i) {
+                                $levelup = $i;
+                                $value->setRanked($levelup);
+                                $value->setRankedupdated(true);
+                                // Affichage des paliers
+                                //echo $base; echo "Level :".$levelup."\n";
+                            }
+                            
                         }
-                        if ($total > 1000000 && $user_rank < 2) {
-                            $value->setRanked(2);
-                            $value->setRankedupdated(true);
-                        }
-                        if ($total > 10000000 && $user_rank < 3) {
-                            $value->setRanked(3);
-                            $value->setRankedupdated(true);
-                        }
-                        if ($total > 50000000 && $user_rank < 4) {
-                            $value->setRanked(4);
-                            $value->setRankedupdated(true);
-                        }
-                        if ($total > 100000000 && $user_rank < 5) {
-                            $value->setRanked(5);
-                            $value->setRankedupdated(true);
-                        }
-                    $em->persist($value);
-                    $em->flush();
+                        $i++;
+                    }
+
+                                $progress = $total*10/$base*2;
+                                //echo $progress."\n";
+                                $value->setProgress(100*$total/$base*2);
+                                $value->setNextprogress($base*2);
+                }
+                $em->persist($value);
+                $em->flush();
             }
         }
         echo json_encode($response);
         curl_close($curl);
         return $this->render('MediashareAppBundle::zero.html.twig');
     }
-    public function online($today)
+    public function online($today,$value)
     {
-        $IdUser = $this->getUser()->getId();
+        // $IdUser = $this->getUser()->getId();
+        $IdUser = $value->getId();
+        // echo "id : ".$IdUser;
         $em1 = $this->getDoctrine()->getManager();
             $login = $em1->getRepository('MediashareUserBundle:User')->find($IdUser);
             $login->setConnected(true);
@@ -158,7 +201,10 @@ class DefaultController extends Controller
     }
     public function sitestatesAction()
     {
-        $privatekey = $this->getUser()->getPrivatekey();
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->getRepository('MediashareAppBundle:Config')->find(1);
+        $privatekey =$config->getPrivateKey();
+
         if (!$privatekey) {
             $privatekey = 'UEYZDnaSATmGtwne5vYjBfJBa9loLHTv';
         }
