@@ -1,22 +1,26 @@
-<ol class="breadcrumb">
-    <li>
-        <i class="fa fa-home"></i> <a href="{{ path('mediashare_app_homepage') }}">Home</a>
-    </li>
-    <li>
-        <i class="fa fa-cube"></i> <a href="{{ path('admin_product_new') }}">Participer</a>
-    </li>
-    {% if app.user.hasRole('ROLE_ADMIN') %}
-    <li>
-        <i class="fa fa-cubes"></i> <a href="{{ path('admin_category') }}">Concours</a>
-    </li>
-    {% endif %}
-    <!-- <li>
-        <i class="fa fa-info"></i> <a href="">Info</a>
-    </li>
-    <li>
-        <i class="fa fa-comments"></i> <a href="">Contact</a>
-    </li> -->
-    <li>
-        <i class="fa fa-user"></i> <a href="{{ path('fos_user_security_logout') }}">Logout ({{ app.user.username }})</a>
-    </li>
-</ol>
+<div class="header-photo">
+    <div class="article2">
+      <div class="title_header">WebMiner</div>
+      <div class="subtitle">La Mine de l'Escale<br><span>Système de Donation/Ranking Server Discord</span></div>
+    </div>
+    <div class="article">
+      <div class="miner">
+        <div class="row">
+          <div class="box">
+            <h3>Total Points</h3>
+            <h2 id="pool-hashes">...</h2>
+          </div>
+          <div class="box">
+            <h3>Total XMR</h3>
+            <h2 id="pool-xmr">...</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box">
+            <h3>Total Point(s)/s</h3>
+            <h2 id="pool-hashes-perSecond">...</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

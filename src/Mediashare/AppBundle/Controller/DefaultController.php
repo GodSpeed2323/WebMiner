@@ -34,29 +34,12 @@ class DefaultController extends Controller
         ));
     }
 
-    public function updateAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array(), array('classement' => 'ASC'));
-
-        return $this->render('MediashareAppBundle::_login.html.twig', array(
-            'entity' => $entity,
-        ));
-    }
-    public function connectedAction()
-    {
-        // Miner Connected
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('connected' => 1), array('classement' => 'ASC'));
-
-        return $this->render('MediashareAppBundle::_connected.html.twig', array(
-            'entity' => $entity,
-        ));
-    }
+   
     public function minerjsAction()
     {
         // SiteKey Miner Js
         $id_config = $this->getUser()->getConfig();
+        $username = $this->getUser()->getUsername();
         $id_user = $this->getUser()->getId();
         $user_rank = $this->getUser()->getRanked();
         $total = $this->getUser()->getPoints();
@@ -87,12 +70,17 @@ class DefaultController extends Controller
             'nextprogress' => $nextprogress,
             'ranked' => $user_rank,
             'points_total' => $total,
+            'username_controller' => $username,
         ));
     }
 
     public function topminersAction()
     {
-        $id_config = $this->getUser()->getConfig();
+        if ($this->getUser()) {
+            $id_config = $this->getUser()->getConfig();
+        }else {
+            $id_config = 1;
+        }
         if ($id_config == null) {
             $id_config = 1;
         }
@@ -141,7 +129,7 @@ class DefaultController extends Controller
 
 
                 $user_rank = $value->getRanked();
-                $base = 1000000;
+                $base = 100000;
                 if ($user_rank == null | $user_rank == 0) {
                     if ($total < $base) {
                         $user_rank = 0;
@@ -154,11 +142,13 @@ class DefaultController extends Controller
                         
                     }else{
                         $user_rank = 1;
+                        $value->setRanked(1);
+                        $value->setRankedupdated(true);
                     }
                 }
                 if ($total > $base) {
                         $i=2;
-                        while ($i <= 20) {
+                    while ($i <= 20) {
                         if ($total > $base*2) {
                             $base = $base*2;
                             if ($user_rank < $i) {
@@ -229,7 +219,6 @@ class DefaultController extends Controller
         $em->persist($Server);
         $em->flush();
 
-        $this->connectedAction();
         return $this->render('MediashareAppBundle::zero.html.twig');
     }
     public function loginuserAction($username)

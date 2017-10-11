@@ -4,18 +4,18 @@
 parameters:
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     pw
+    database_name:     webminer
     database_user:     root
     database_password: ~
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
     mailer_transport:  smtp
-    mailer_host: vm-mail0.point-web.fr
-    mailer_user: mailing@sercopw.fr
-    mailer_password: Mediashare#2007
-    mail_to: "a.verilhac@point-web.fr"
-    base: "http://127.0.0.1/pw/"
+    mailer_host: ssl0.ovh.net
+    mailer_user: admin@slote.me
+    mailer_password: ~
+    mail_to: "admin@slote.me"
+    base: "http://127.0.0.1/webminer/"
     captchaKey: '6LdgdxQTAAAAAKVHDTXT53qmKbXligUN9MmHy0FO'
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt

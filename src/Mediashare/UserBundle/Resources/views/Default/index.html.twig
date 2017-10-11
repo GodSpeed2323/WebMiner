@@ -1,8 +1,80 @@
-{% for folder in folders %}
-    {{ folder.name }}
-    {% for picture in folder.pictures %}
-        {{ picture.name }}
-        {{ picture.description }}
-        <img src="{{ asset(picture.getWebPath(base)) }}" alt="{{ picture.name }}"/>
-        {% endfor %}
-{% endfor %}
+{% extends 'MediashareAppBundle::base.html.twig' %}
+{% block content %}
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}" media="all"/>
+<div class="profile-card">
+	<div class="profile-cover">
+		<div class="profile-avatar">
+			<div class="btns-container">
+				<div class="profile-links">
+				</div>
+			</div>
+			<a href="#"><img src="http://www.bongbitcoin.com/images/miner.png" height="150px" width="150px" alt="Username" /></a>
+		</div>
+		<div class="profile-details">
+			<h1>Slote</h1>
+			<h6>Mediashare.supp@gmail.com</h6>
+		</div>
+	</div>
+	<div class="profile-content">
+		<div id="menu-outer">
+  <div class="table">
+    <ul id="horizontal-list">
+      <li>
+			<div>{{ classement }}</div>
+			Classement
+		</li>
+		<li>
+			<div>{{ leveling }}</div>
+			Level
+		</li>
+		<li>
+			<div>{{ points }}</div>
+			Points
+		</li>
+		<li>
+			<div>{{ nextleveling }}</div>
+			Next Level (Points)
+		</li>
+		<li>
+			<div>{{ passPhrase2 }}</div>
+			Secret Pass
+		</li>
+		<li>
+			<div>Salut tout le monde !</div>
+			Message (150 caractères)
+		</li>
+    </ul>
+  </div>
+</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.menu-container').hover(
+        function(){
+            $('.profile-actions').slideDown('fast');
+          $('.list-icon').addClass('active');
+        },
+        function(){
+            $('.profile-actions').slideUp('fast');
+          $('.list-icon').removeClass('active');
+        }
+    );
+    $('.profile-card').mouseleave(function(){
+        $('.profile-actions').slideUp('fast');
+        $('.profile-info').slideUp('fast');
+        $('.profile-map').slideUp('fast');
+    });
+
+    $('.profile-avatar').hover(
+        function(){
+            $('.profile-links').fadeIn('fast');
+        },
+        function(){
+            $('.profile-links').hide();
+        }
+    );;
+});
+</script>
+{% endblock %}

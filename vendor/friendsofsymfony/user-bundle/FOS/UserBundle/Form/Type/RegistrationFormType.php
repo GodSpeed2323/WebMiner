@@ -30,6 +30,14 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('config', 'choice', array(
+                'label' => 'Serveur Discord',
+                'choices'  => array(
+                    null => "Choisir",
+                    1 => "L'Escale",
+                    // 2 => "Taka",
+                ),
+                ))
             ->add('email', 'email', array('label' => 'Email Confirmed','attr' => array('placeholder' => 'Email *')))
             ->add('username', null, array('label' => 'Username','attr' => array('placeholder' => 'Username *')))
             ->add('plainPassword', 'repeated', array(

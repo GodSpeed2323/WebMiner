@@ -7,14 +7,21 @@ body {
 body {
  margin: 0;
 }
-
+.article2 {
+  position: absolute;
+  bottom: 320px;
+  z-index: 2;
+  color: white;
+  width: 100%;
+  padding-bottom: 20px;
+}
 .header-photo {
   width: 100%;
   height: 100%;
   z-index: 2;
   position: relative;
   text-align: center;
-  background: url("https://vignette4.wikia.nocookie.net/steamtradingcards/images/b/bf/Planet_Alcatraz_Background_Coal_mine.jpg/revision/latest?cb=20140807180230");
+  background: url("http://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/231330/18b10308bc33ce3c4e1ac96143f515c18f978b5a.jpg");
   background-size: cover;
   background-position: 50% 0%;
 }

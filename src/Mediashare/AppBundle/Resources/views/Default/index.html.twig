@@ -1,89 +1,112 @@
 {% extends 'MediashareAppBundle::base.html.twig' %}
 {% block content %}
-    <div class="miner">
-        <div class="row">
-            <div class="box">
-                <h3>Point(s)/s</h3>
-                <h2 id="hashes-per-second">0</h2>
-            </div>
-            <div class="box">
-                <h3>threads</h3>
-                <h2>
-                <span id="threads">2</span>
-                <span id="thread-add" class="action"> + </span>
-                <span class="divide"> / </span>
-                <span id="thread-remove" class="action"> - </span>
-                </h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="box">
-                <h3>Points</h3>
-                <h2 id="accepted-shares">0</h2>
-            </div>
-            <div class="box">
-                <h3>Auto Threads</h3>
-                <div class="autoThreads">
-                    <input type="checkbox" value="None" id="autoThreads" name="check" />
-                    <label for="autoThreads"></label>
+    <div class="intro">
+        {% block info %}
+            {% include 'MediashareAppBundle::_info.html.twig' %}
+        {% endblock %}
+        <hr class="separte"></hr>
+        <div class="miner">
+            <h3>Miner Online</h3>
+            <p class="online"></p>
+            
+            <p><em>Vous devez désactiver AdBlock afin que le javascript soit bien activé.</em></p>
+            <hr class="separte"></hr>
+            <div class="row">
+                <div class="green progress_bar" style="padding: 3% 20%;">
+                    <div class="progress">
+                        <div class="inner">
+                            <div class="percent"><span></span></div>
+                            <div class="water"></div>
+                            <div class="glare"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <div class="row">
+                <input class="text" type="text" id="username" value="{{ username }}" disabled="true">
+            </div>
+            <h2>Level <span id="ranked">1</span></h2>
         </div>
-        <div class="row">
-            <input class="text" type="text" id="username" value="{{ username }}" disabled="true">
+        <hr class="separte"></hr>
+        <div class="miner">
+            <div class="row">
+                <div class="box">
+                    <h3>Next Level (Points)</h3>
+                    <h2 id="nextprogress">0</h2>
+                </div>
+                <div class="box">
+                    <h3>Classement</h3>
+                    <h2 id="classement">0</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box">
+                    <h3>Points</h3>
+                    <h2 id="accepted-shares">0</h2>
+                </div>
+                <div class="box">
+                    <h3>Vitesse</h3>
+                    <h2>
+                    <span id="threads">2</span>
+                    <span id="thread-add" class="action"> + </span>
+                    <span class="divide"> / </span>
+                    <span id="thread-remove" class="action"> - </span>
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box">
+                    <h3>Points/s</h3>
+                    <h2 id="hashes-per-second">0</h2>
+                </div>
+                <div class="box">
+                    <h3>Vitesse Automatique</h3>
+                    <div class="autoThreads">
+                        <input type="checkbox" value="None" id="autoThreads" name="check" />
+                        <label for="autoThreads"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="content-wrapper">
+                <a id="start" class="action-link line-animation">
+                    <div id="start_text" class="link-content">Start Mining</div>
+                    <div class="gradient-animation"></div>
+                </a>
+            </div>
+            
+            <div class="content-wrapper" style="display:flex;">
+                <a id="chartsLeft" class="action-link curtain-link black" >
+                    <div  class="link-content"><</div>
+                    <div class="curtain"></div>
+                </a>
+                <a id="chartsRight" class="action-link curtain-link black" >
+                    <div  class="link-content">></div>
+                    <div class="curtain"></div>
+                </a>
+            </div>
+            
+            <div class="row">
+                <canvas id="donut-canvas" class="stats" width="100%" height="100%"></canvas>
+            </div>
+            <div class="row">
+                <canvas id="barchart-canvas" class="stats" width="100%" height="50%"></canvas>
+            </div>
+            
+            <div class="list">
+                <h3>Top Miners</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="num">#</th>
+                            <th>User</th>
+                            <th class="num">Accepted Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="toplist">
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="content-wrapper">
-            <a id="start" class="action-link line-animation">
-                <div id="start_text" class="link-content">Start Mining</div>
-                <div class="gradient-animation"></div>
-            </a>
-        </div>
-        
-        <div class="content-wrapper" style="display:flex;">
-            <a id="chartsLeft" class="action-link curtain-link black" >
-                <div  class="link-content"><</div>
-                <div class="curtain"></div>
-            </a>
-            <a id="chartsRight" class="action-link curtain-link black" >
-                <div  class="link-content">></div>
-                <div class="curtain"></div>
-            </a>
-        </div>
-        
-        <div class="row">
-            <canvas id="donut-canvas" class="stats" width="100%" height="100%"></canvas>
-        </div>
-        <div class="row">
-            <canvas id="barchart-canvas" class="stats" width="100%" height="50%"></canvas>
-        </div>
-        
-        <div class="list">
-            <h3>Top Miners</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="num">#</th>
-                        <th>User</th>
-                        <th class="num">Accepted Points</th>
-                    </tr>
-                </thead>
-                <tbody id="toplist">
-                </tbody>
-            </table>
-        </div>
-
     </div>
-
-        
-      
-    <!-- <div class="content-wrapper">
-        <a class="action-link curtain-link red" href="/logout">
-            <div class="link-content">Logout</div>
-            <div class="curtain"></div>
-        </a>
-    </div> -->
-    <!-- <iframe src="https://discordapp.com/widget?id=357217327378333708&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe> -->
-    {% block minerjs %}
-        {{ render(controller('MediashareAppBundle:Default:minerjs')) }}
-    {% endblock %}
 {% endblock %}
