@@ -2,16 +2,8 @@ mediashare_newsletter:
     resource: "@MediashareNewsletterBundle/Resources/config/routing.yml"
     prefix:   /
 
-mediashare_referencing:
-    resource: "@MediashareReferencingBundle/Resources/config/routing.yml"
-    prefix:   /
-
 mediashare_ged:
     resource: "@MediashareGedBundle/Resources/config/routing.yml"
-    prefix:   /
-
-mediashare_news:
-    resource: "@MediashareNewsBundle/Resources/config/routing.yml"
     prefix:   /
 
 mediashare_user:

@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
 use Mediashare\AppBundle\Entity\Contact;
 use Mediashare\AppBundle\Entity\Server;
 use Mediashare\AppBundle\Entity\Config;
-use Mediashare\AppBundle\Form\ContactType;
 use Mediashare\UserBundle\Entity\User;
 use Mediashare\AppBundle\Sitemap\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -221,10 +220,6 @@ class DefaultController extends Controller
 
         return $this->render('MediashareAppBundle::zero.html.twig');
     }
-    public function loginuserAction($username)
-    {
-        return $this->render('MediashareAppBundle::zero.html.twig');
-    }
 
     public function pageNotFoundAction()
     {
@@ -239,94 +234,6 @@ class DefaultController extends Controller
     public function maintenancePopAction()
     {
         return $this->render('MediashareAppBundle::_maintenance.html.twig');
-    }
-
-    public function legalAction()
-    {
-        return $this->render('MediashareAppBundle:Default:legal.html.twig');
-    }
-
-    public function footerAction()
-    {
-        $date = new \DateTime();
-        return $this->render('MediashareAppBundle::_footer.html.twig', array('date' => $date));
-    }
-
-    public function menuAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $menus = $em->getRepository('MediashareAdminBundle:Menu')->findBy(
-            array('parent' => null),
-            array('position' => 'ASC')
-        );
-        return $this->render('MediashareAppBundle::_menu.html.twig', array(
-            'menus' => $menus
-        ));
-    }
-
-
-    /**
-     * Page Contact
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function contactAction(Request $request)
-    {
-        $captchaKey = $this->container->getParameter('captchaKey');
-        $entity = new Contact();
-        $form = $this->createForm(new ContactType(), $entity, array(
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Envoyer'));
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (isset($_POST['g-recaptcha-response'])) {
-                $captcha = $_POST['g-recaptcha-response'];
-            }
-            if ($captcha) {
-                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$captchaKey."&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
-                if ($response == false) {
-                    return $this->redirectToRoute('mediashare_app_contact');
-                } else {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($entity);
-                    $em->flush();
-
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Contact site')
-                        ->setFrom($entity->getEmail())
-                        ->setTo($this->container->getParameter('mail_to'))
-                        ->setBody($this->renderView('MediashareAppBundle:Mail:contact.html.twig', array(
-                            'entity' => $entity
-                        )))
-                        ->setContentType('text/html');
-                    $this->get('mailer')->send($message);
-
-                    return $this->redirect($this->generateUrl('mediashare_app_thanks'));
-                }
-            }
-
-        }
-        return $this->render('MediashareAppBundle:Default:contact.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-            'captchaKey' => $captchaKey
-        ));
-
-    }
-
-    public
-    function thanksAction()
-    {
-        return $this->render('MediashareAppBundle:Default:thanks.html.twig');
-    }
-
-    public
-    function cookiesAction()
-    {
-        return $this->render('MediashareAppBundle:Default:cookies.html.twig');
     }
 
     /**

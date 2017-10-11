@@ -23,19 +23,7 @@ mediashare_app_sitemap:
 mediashare_app_sitemapXml:
     path:     /sitemap.xml
     defaults: { _controller: MediashareAppBundle:Default:sitemapXml }
-
-mediashare_app_cookies:
-    path:     /cookies
-    defaults: { _controller: MediashareAppBundle:Default:cookies }
-#
-# mediashare_app_thanks:
-#     path:     /thanks
-#     defaults: { _controller: MediashareAppBundle:Default:thanks }
-
-mediashare_app_voting:
-    path:     /{idpublication}/{idconcours}/voting
-    defaults: { _controller: "MediashareAppBundle:Default:vote" }
-
+    
 
 mediashare_contact_admin:
     resource: "@MediashareAppBundle/Resources/config/routing/admin_contact.yml"

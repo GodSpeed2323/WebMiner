@@ -16,17 +16,13 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager
-            logout:       true
-            anonymous:    true
+            logout:       false
+            anonymous:    true  
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/Gestion/Concours, role: ROLE_ADMIN }
-        # - { path: ^/admin/Concours, role: ROLE_ADMIN }
-        - { path: ^/Gestion/Publication/list, role: ROLE_SUPER_ADMIN }
-        - { path: ^/Gestion/Publication, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
         - { path: ^/api/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }
