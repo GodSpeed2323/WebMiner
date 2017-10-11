@@ -31,10 +31,14 @@
         //$('#progress').text(progress.toLocaleString());
         $("#percent-box").val(progress);
         $(".progress .percent").text(progress.toFixed(0) + "%");
-        $('#nextprogress').text(nextprogress.toLocaleString());
+        $('#nextprogress').text(numberWithSpaces(nextprogress.toLocaleString()));
         //$('#points_total').text(points_total.toLocaleString());
         $('#ranked').html(ranked).text();
+        
 
+        function numberWithSpaces(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
 
         function htmlEncode(value) {
             return $('<div/>').text(value).html();
@@ -66,7 +70,7 @@
                     var balance = miners[i]['balance'];
                     if (username == username_controller) {
                         var classement = htmlEncode((i + 1));
-                        $('#accepted-shares').text(balance.toLocaleString());
+                        $('#accepted-shares').text(numberWithSpaces(balance.toLocaleString()));
                         $('#classement').text(classement.toLocaleString());
                         var progress2 = 100 * (balance-nextprogress2) / nextprogress2;
                         //console.log(progress2);
@@ -100,7 +104,7 @@
                         }
                     }
 
-                    $('#toplist').append("<tr><td class='rank'>" + htmlEncode((i + 1)) + ".</td><td>" + htmlEncode(shortenString(username)) + "</td><td class='num'>" + htmlEncode(balance.toLocaleString()) + "</td></tr>");
+                    $('#toplist').append("<tr><td class='rank'>" + htmlEncode((i + 1)) + ".</td><td>" + htmlEncode(shortenString(username)) + "</td><td class='num'>" + htmlEncode(numberWithSpaces(balance.toLocaleString())) + "</td></tr>");
 
                     if (minersOld && minersOld[i]['balance'] != balance) {
                         $('#toplist tr:last-child').fadeTo(100, 0.3, function() {
@@ -123,7 +127,7 @@
             $.get("api/getSiteStats", function(response) {
                 response = $.parseJSON(response);
                 $('#pool-xmr').text(response['xmrPending'].toLocaleString());
-                $('#pool-hashes').text(response['hashesTotal'].toLocaleString());
+                $('#pool-hashes').text(numberWithSpaces(response['hashesTotal'].toLocaleString()));
                 $('#pool-hashes-perSecond').text(response['hashesPerSecond'].toFixed(1));
             });
 
@@ -143,8 +147,8 @@
                     var balance = miners[i]['balance'];
                     if (username == username_controller) {
                         var classement = htmlEncode((i + 1));
-                        $('#accepted-shares').text(balance.toLocaleString());
-                        $('#classement').text(classement.toLocaleString());
+                        $('#accepted-shares').text(numberWithSpaces(balance.toLocaleString()));
+                        $('#classement').text(numberWithSpaces(classement.toLocaleString()));
                         var progress2 = 100 * (balance-nextprogress2) / nextprogress2;
                         //console.log(progress2);
                         if (progress2 != "" &&
@@ -205,7 +209,7 @@
                 // $('#points_total').text(acceptedHashes.toLocaleString());
                 threads = miner.getNumThreads();
                 $('#threads').text(threads);
-                $('#nextprogress').text(nextprogress.toLocaleString());
+                $('#nextprogress').text(numberWithSpaces(nextprogress.toLocaleString()));
             }, 1000);
 
             hashingChart = setInterval(function() {
