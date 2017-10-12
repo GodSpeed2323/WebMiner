@@ -105,7 +105,6 @@ class UserController extends Controller
      */
     public function showAction($id)
     {
-        
             $em = $this->getDoctrine()->getManager();
 
             $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
@@ -119,10 +118,7 @@ class UserController extends Controller
             return $this->render('MediashareUserBundle:User:show.html.twig', array(
                 'entity' => $entity,
                 'delete_form' => $deleteForm->createView(),
-            ));
-        
-            
-        
+            ));       
     }
 
     /**
@@ -169,7 +165,7 @@ class UserController extends Controller
                 'delete_form' => $deleteForm->createView(),
             ));
         }else{
-            return $this->redirect($this->generateUrl('admin_user'));
+            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getId())));
         }
     }
 
@@ -228,7 +224,7 @@ class UserController extends Controller
             $entity->setUpdateDate(new \DateTime());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mediashare_app_homepage'));
+            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getId())));
         }
 
         return $this->render('MediashareUserBundle:User:edit.html.twig', array(

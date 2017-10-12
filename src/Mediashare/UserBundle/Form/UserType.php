@@ -14,11 +14,11 @@ class UserType extends AbstractType
     {
         // add your custom field
         $builder
-            ->add('username', 'text', array(
-                "label" => "Nom d'utilisateur :",
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-3 control-label'),
-            ))
+            // ->add('username', 'text', array(
+            //     "label" => "Nom d'utilisateur :",
+            //     'attr' => array('class' => 'form-control'),
+            //     'label_attr' => array('class' => 'col-lg-3 control-label'),
+            // ))
             ->add('serverName', 'entity', array(
                 'required' => true,
                 'class' => 'MediashareAppBundle:Config',
