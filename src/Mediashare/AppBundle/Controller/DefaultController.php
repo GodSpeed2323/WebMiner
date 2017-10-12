@@ -221,6 +221,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $config = $em->getRepository('MediashareAppBundle:Config')->findBy(array('name' => $serverName));
         $privatekey =$config[0]->getPrivateKey();
+        $idConfig =$config[0]->getId();
 
         if (count($config) < 1 ){
              return $this->redirect($this->generateUrl('create_server'));
@@ -238,20 +239,21 @@ class DefaultController extends Controller
         $points_seconde = $json['hashesPerSecond'];
         $points_total = $json['hashesTotal'];
         $xmr_total = $json['xmrPending'];
-
-        $em2 = $this->getDoctrine()->getManager();
-            $Server = $em2->getRepository('MediashareAppBundle:Server')->find(1);
-            $Server->setPointsSeconde($points_seconde);
-            $Server->setPointsTotal($points_total);
-            $Server->setXmrTotal($xmr_total);
-        $em2->persist($Server);
-        $em2->flush();
-        
-            $config[0]->setPointsSeconde($points_seconde);
-            $config[0]->setPointsTotal($points_total);
-            $config[0]->setXmrTotal($xmr_total);
+            
+        $config[0]->setPointsSeconde($points_seconde);
+        $config[0]->setPointsTotal($points_total);
+        $config[0]->setXmrTotal($xmr_total);
         $em->persist($config[0]);
         $em->flush();
+
+        $Server = $em->getRepository('MediashareAppBundle:Server')->find($idConfig);
+        $Server->setPointsSeconde($points_seconde);
+        $Server->setPointsTotal($points_total);
+        $Server->setXmrTotal($xmr_total);
+        $em->persist($Server);
+        $em->flush();
+        
+            
 
         return $this->render('MediashareAppBundle::zero.html.twig');
     }

@@ -69,8 +69,22 @@ class ConfigController extends Controller
             $entity->setAdmin($admin);
             $entity->setOnline(true);
 
+            
+
             $em->persist($entity);
             $em->flush();
+            $idServer = $entity->getId();
+
+            $server = new Server();
+            $server->setIdserver($idServer);
+            $server->setPointsSeconde(1);
+            $server->setPointsTotal(1);
+            $server->setXmrTotal(1);
+            $server->setNbonline(0);
+            
+            $em->persist($server);
+            $em->flush();
+
 
             // return $this->redirect($this->generateUrl('create_server_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('create_server'));
@@ -129,6 +143,8 @@ class ConfigController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('MediashareAppBundle:Config')->find($id);
+        $serverName = $entity->getName();
+        $users = $em->getRepository('MediashareUserBundle:User')->findBy(array('serverName' => $serverName), array('classement' => 'ASC'));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Config entity.');
@@ -145,6 +161,7 @@ class ConfigController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
             'online_form' => $onlineForm->createView(),
+            'users' => $users
         ));
     }
 
