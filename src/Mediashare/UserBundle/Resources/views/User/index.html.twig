@@ -21,17 +21,19 @@
                 <th>Classement</th>
                 <th>Points</th>
                 <th>Level</th>
+                <th>Server</th>
                 <th>Online ?</th>
                 <th style="width: 125px;">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for entity in entities %}
-                <tr>
+                <tr {% if entity.connected == true %}class="success"{% else %}class="danger"{% endif %}>
                     <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                     <td>{{ entity.classement }}</td>
                     <td>{{ entity.points }}</td>
                     <td>{{ entity.ranked }}</td>
+                    <td>{{ entity.serverName }}</td>
                     <td>{% if entity.connected == true %}{{ 'Oui' }}{% else %}{{ 'Non' }}{% endif %}</td>
                     <td>
                         <div class="btn-group-vertical">

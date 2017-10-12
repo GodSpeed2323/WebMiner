@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MediashareUserBundle:User')->findAll();
+        $entities = $em->getRepository('MediashareUserBundle:User')->findBy(array(),array('connected' => 'DESC', 'points' => 'DESC'));
 
         return $this->render('MediashareUserBundle:User:index.html.twig', array(
             'entities' => $entities,

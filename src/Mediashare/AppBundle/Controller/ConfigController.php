@@ -24,7 +24,7 @@ class ConfigController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MediashareAppBundle:Config')->findAll();
+        $entities = $em->getRepository('MediashareAppBundle:Config')->findBy(array(),array('pointsTotal' => 'DESC'));
 
         return $this->render('MediashareAppBundle:Config:index.html.twig', array(
             'entities' => $entities,
