@@ -4,14 +4,14 @@
     <div class="login-wrap2">
         <div class="intro">
         <h1 class="page-header">
-            Création d'un utilisateur
+               <i class="fa fa-user"></i>  Create User
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Utilisateurs</a>
+                <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Users</a>
             </li>
             <li class="active">
-                <i class="fa fa-plus-circle"></i> Ajouter
+                <i class="fa fa-plus-circle"></i> Add
             </li>
         </ol>
         {{ form_start(form, {'attr': {'class':'form-horizontal' }}) }}
@@ -87,8 +87,7 @@
         </fieldset>
         {{ form_end(form) }}
 
-        <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
-            liste</a>
+        <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the list</a>
     </div>
 </div>
 {% endblock fos_user_content %}

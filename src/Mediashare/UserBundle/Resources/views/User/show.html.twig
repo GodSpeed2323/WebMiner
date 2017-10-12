@@ -5,11 +5,11 @@
         <div class="intro">
             
             <h2 class="page-header">
-            Profile
+               <i class="fa fa-user"></i> Profile
             </h2>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Utilisateurs</a>
+                    <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Users</a>
                 </li>
                 <li class="active">
                     <i class="fa fa-eye"></i> Show
@@ -25,7 +25,7 @@
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Serveur</h3>
+                    <h3 class="panel-title">Server</h3>
                 </div>
                 <div class="panel-body">
                     {{ entity.serverName }}
@@ -50,12 +50,11 @@
                 </div>
             </div>
             
-            <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
-            liste</a>
+            <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the list </a>
             {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.id %}
                 <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
                     class="fa fa-pencil"></i>
-                Modifier</a>
+                Update</a>
                 {{ form(delete_form) }}
             {% endif %}
         </div>

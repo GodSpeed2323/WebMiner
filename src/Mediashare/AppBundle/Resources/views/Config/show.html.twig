@@ -4,6 +4,7 @@
     <div class="login-wrap2">
         <div class="intro">
             <h2 class="page-header">
+            <i class="fa fa-server"></i>
             Server
             </h2>
             <ol class="breadcrumb">
@@ -35,7 +36,7 @@
             {% endif %}
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Serveur Key</h3>
+                    <h3 class="panel-title">CoinHive Server Key</h3>
                 </div>
                 <div class="panel-body">
                     <h5 class="panel-title">Public Key</h5>
@@ -66,11 +67,11 @@
         {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
             <a href="{{ path('create_server_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
                 class="fa fa-pencil"></i>
-            Modifier</a>
+            Update</a>
             
             <div class="col-lg-4">
         {% endif %}
-            <a href="{{ path('create_server') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la liste</a>
+            <a href="{{ path('create_server') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the list</a>
             
         {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
             </div>

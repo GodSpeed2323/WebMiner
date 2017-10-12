@@ -4,15 +4,15 @@
     <div class="login-wrap2">
         <div class="intro">
             <h2 class="page-header">
-            Servers List
+            <i class="fa fa-server"></i> Servers List
             </h2>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-server"></i> Servers List
+                    Select a Server
                 </li>
             </ol>
             {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
-                <a href="{{ path('create_server_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter</a>
+                <a href="{{ path('create_server_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
             {% endif %}
             <table class="table table-striped table-hover">
                 <thead>
@@ -40,7 +40,7 @@
                                     class="fa fa-cogs"></i> Connexion</a>{% endif %}
                                     {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
                                         <a href="{{ path('create_server_edit', {'id':entity.id}) }}" class="btn btn-info"><i
-                                        class="fa fa-pencil"></i> Modifier</a>
+                                        class="fa fa-pencil"></i> Update</a>
                                     {% endif %}
                                 </div>
                             </td>
