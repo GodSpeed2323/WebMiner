@@ -2,7 +2,9 @@ mediashare_app_homepage:
     path:     /
     defaults: { _controller: MediashareAppBundle:Default:index }
 
-
+mediashare_app_create_server:
+    resource: "@MediashareAppBundle/Resources/config/routing/config.yml"
+    prefix:   /Server
 
 
 topminers:

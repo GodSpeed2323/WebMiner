@@ -37,6 +37,16 @@ class User extends BaseUser
     protected $username;
 
     /**
+     * @ORM\Column(type="string", name="serverName", length=255)
+     */
+    protected $serverName;
+   
+    /**
+     * @ORM\Column(type="string", name="ticketpass", length=255, nullable=true)
+     */
+    protected $ticketpass;
+
+    /**
      * @ORM\Column(type="string", name="first_name", length=255, nullable=true)
      */
     protected $firstName;
@@ -452,5 +462,51 @@ class User extends BaseUser
     public function getNextprogress()
     {
         return $this->nextprogress;
+    }
+
+    /**
+     * Set serverName
+     *
+     * @param string $serverName
+     * @return User
+     */
+    public function setServerName($serverName)
+    {
+        $this->serverName = $serverName;
+
+        return $this;
+    }
+
+    /**
+     * Get serverName
+     *
+     * @return string 
+     */
+    public function getServerName()
+    {
+        return $this->serverName;
+    }
+
+    /**
+     * Set ticketpass
+     *
+     * @param string $ticketpass
+     * @return User
+     */
+    public function setTicketpass($ticketpass)
+    {
+        $this->ticketpass = $ticketpass;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketpass
+     *
+     * @return string 
+     */
+    public function getTicketpass()
+    {
+        return $this->ticketpass;
     }
 }

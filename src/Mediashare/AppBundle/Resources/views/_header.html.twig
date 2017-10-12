@@ -1,7 +1,9 @@
 <div class="header-photo">
-    <div class="article2">
-      <div class="title_header">WebMiner</div>
-      <div class="subtitle">La Mine de l'Escale<br><span>Système de Donation/Ranking Server Discord</span></div>
+  <div class="article2">
+    <div class="title_header">WebMiner</div>
+    <div class="subtitle">La Mine de
+      {% if config.link|length > 0 %}<a target="_blank" href="{{ config.link }}">{{ config.name }}</a>{% else %}<a target="_blank" href="{{ path('create_server_show', {'id': config.id}) }}">{{ config.name }}</a>{% endif %}
+      <br><span>Système de Donation/Ranking Server Discord</span></div>
     </div>
     <div class="article">
       <div class="miner">
@@ -21,6 +23,19 @@
             <h2 id="pool-hashes-perSecond">...</h2>
           </div>
         </div>
+        <div class="row">
+            <a id="start" class="action-link line-animation">
+              <div id="start_text" class="link-content">Start Mining</div>
+              <div class="gradient-animation"></div>
+            </a>
+        </div>
+        <ul class="ul_menu">
+          <li class="li_menu"><p><i class="fa fa-cogs"></i> <a href="{{ path('mediashare_app_homepage') }}"><strong>La Mine</strong></a></p></li>
+          <li class="li_menu"><p><i class="fa fa-user"></i> <a href="{{ path('user') }}"><strong>Profile</strong></a></p></li>
+          <li class="li_menu"><p><i class="fa fa-server"></i> <a href="{{ path('create_server') }}"><strong>List of Servers</strong></a></p></li>
+          <li class="li_menu"><p><i class="fa fa-plus"></i> <a href="{{ path('create_server_new') }}"><strong>Create My Server</strong></a></p></li>
+        </ul>
+        
       </div>
     </div>
-</div>
+  </div>

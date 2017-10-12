@@ -1,34 +1,3 @@
-<!-- <li {% if app.request.attributes.get('_route') starts with 'admin_menu' %}class="active"{% endif %}>
-    <a href="{{ path('admin_menu') }}"><i class="fa fa-sitemap"></i> {{ "Menu" }}</a>
-</li> -->
-{% if app.user.hasRole('ROLE_ADMIN') %}
-<li class="dropdown {% if app.request.attributes.get('_route') starts with 'admin_product' or app.request.attributes.get('_route') starts with 'admin_category' %}active{% endif %}">
-    <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-bars"></i> {{ "Concours" }} <b class="caret"></b></a>
-    <ul class="collapse" id="products">
-        <li {% if app.request.attributes.get('_route') starts with 'admin_product' %}class="active"{% endif %}><a
-                    href="{{ path('admin_product') }}"><i class="fa fa-cubes"></i> {{ "Participant" }}</a></li>
-        <li {% if app.request.attributes.get('_route') starts with 'admin_category' %}class="active"{% endif %}><a
-                    href="{{ path('admin_category') }}"><i class="fa fa-cube"></i> {{ "Concours" }}</a></li>
-    </ul>
-</li>
-
-{% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
-  <!--   <li class="dropdown {% if app.request.attributes.get('_route') starts with 'admin_referencing' or app.request.attributes.get('_route') starts with 'admin_keywords' %}active{% endif %}">
-        <a href="javascript:;" data-toggle="collapse" data-target="#seo"><i class="fa fa-bars"></i> {{ "Referencement" }} <b class="caret"></b></a>
-        <ul class="collapse" id="seo">
-            <li {% if app.request.attributes.get('_route') starts with 'admin_referencing' %}class="active"{% endif %}><a
-                        href="{{ path('admin_referencing') }}"><i class="fa fa-bookmark"></i> {{ "Referencement des pages" }}</a></li>
-            <li {% if app.request.attributes.get('_route') starts with 'admin_keywords' %}class="active"{% endif %}><a
-                        href="{{ path('admin_keywords') }}"><i class="fa fa-key"></i> {{ "Keywords" }}</a></li>
-        </ul>
-    </li>
-
-<li {% if app.request.attributes.get('_route') starts with 'admin_news' %}class="active"{% endif %}>
-    <a href="{{ path('admin_news') }}"><i class="fa fa-newspaper-o"></i> {{ "News" }}</a>
-</li>
-<li {% if app.request.attributes.get('_route') starts with 'admin_folder' %}class="active"{% endif %}>
-    <a href="{{ path('admin_folder') }}"><i class="fa fa-file"></i> {{ "Gestion documentaire" }}</a>
-</li>
 <li {% if app.request.attributes.get('_route') starts with 'admin_contact' %}class="active"{% endif %}>
     <a href="{{ path('admin_contact') }}"><i class="fa fa-envelope"></i> {{ "Contact" }}</a>
 </li>
@@ -43,9 +12,9 @@
         <li {% if app.request.attributes.get('_route') starts with 'admin_newsletter' %}class="active"{% endif %}><a
                     href="{{ path('admin_newsletter') }}"><i class="fa fa-paper-plane"></i> {{ "Gestion des newsletters" }}</a></li>
     </ul>
-</li> -->
-{% endif %}
+</li> 
+
 <li {% if app.request.attributes.get('_route') starts with 'admin_user' %}class="active"{% endif %}>
     <a href="{{ path('admin_user') }}"><i class="fa fa-users"></i> {{ "Utilisateurs" }}</a>
 </li>
-{% endif %}
+

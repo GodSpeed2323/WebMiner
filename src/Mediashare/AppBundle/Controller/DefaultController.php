@@ -22,22 +22,45 @@ class DefaultController extends Controller
     {
         // Page Principal
         $username = $this->getUser()->getUsername();
-
+        $serverName = $this->getUser()->getServerName();
+        
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array(), array('classement' => 'ASC'));
+        $config = $em->getRepository('MediashareAppBundle:Config')->findBy(array('name' => $serverName));
+       // var_dump($config);die;
 
-
+        if (count($config) < 1 ){
+             return $this->redirect($this->generateUrl('create_server'));
+        }
+        $online = $config[0]->getOnline();
+        $idConfig = $config[0]->getid();
+        if ($online == 0) {
+           return $this->redirect($this->generateUrl('create_server_show', array('id' => $idConfig)));
+        }
         return $this->render('MediashareAppBundle:Default:index.html.twig', array(
             'username' => $username,
-            'entity' => $entity,
+            'idConfig' => $idConfig
         ));
     }
 
-   
+
+    public function headerAction($idConfig)
+    {
+        $username = $this->getUser()->getUsername();
+        
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->getRepository('MediashareAppBundle:Config')->find($idConfig);
+       
+        return $this->render('MediashareAppBundle::_header.html.twig', array(
+            'username' => $username,
+            'config' => $config
+            
+        ));
+    }
+
     public function minerjsAction()
     {
         // SiteKey Miner Js
-        $id_config = $this->getUser()->getConfig();
+        $serverName = $this->getUser()->getServerName();
         $username = $this->getUser()->getUsername();
         $id_user = $this->getUser()->getId();
         $user_rank = $this->getUser()->getRanked();
@@ -45,21 +68,21 @@ class DefaultController extends Controller
         $progress = $this->getUser()->getProgress();
         $nextprogress = $this->getUser()->getNextprogress();
 
-        if ($id_config == null) {
-            $id_config = 1;
-        }
         $em = $this->getDoctrine()->getManager();
-        $config = $em->getRepository('MediashareAppBundle:Config')->find($id_config);
-        $publickey =$config->getPublicKey();
-        
-        $connected = $em->getRepository('MediashareUserBundle:User')->findBy(array('connected' => 1), array('classement' => 'ASC'));
+        $config = $em->getRepository('MediashareAppBundle:Config')->findBy(array('name' => $serverName));
+       // var_dump($config);die;
+        $publickey = $config[0]->getPublicKey();
+
+        if (count($config) < 1 ){
+             return $this->redirect($this->generateUrl('create_server'));
+        }
+
+        $connected = $em->getRepository('MediashareUserBundle:User')->findBy(array('connected' => 1, 'serverName' => $serverName), array('classement' => 'ASC'));
         $msg_connected[] = "";
         foreach ($connected as $key => $value) {
             $msg_connected[] = " <a>".$value->getUsername()."</a> |";
         }
         $msg_connected = join('',$msg_connected);
-
-        $user = $em->getRepository('MediashareUserBundle:User')->find($id_user);
         
         
         return $this->render('MediashareAppBundle::_minerjs.html.twig', array(
@@ -76,21 +99,21 @@ class DefaultController extends Controller
     public function topminersAction()
     {
         if ($this->getUser()) {
-            $id_config = $this->getUser()->getConfig();
+            $serverName = $this->getUser()->getServerName();
         }else {
-            $id_config = 1;
+            $serverName = "L'Escale";
         }
-        if ($id_config == null) {
-            $id_config = 1;
+        if ($serverName == null) {
+            $serverName = "L'Escale";
         }
         $em = $this->getDoctrine()->getManager();
-        $config = $em->getRepository('MediashareAppBundle:Config')->find($id_config);
-        $privatekey =$config->getPrivateKey();
+        $config = $em->getRepository('MediashareAppBundle:Config')->findBy(array('name' => $serverName));
+        $privatekey =$config[0]->getPrivateKey();
 
         $today = date("mdHi");
 
-        if (!$privatekey) {
-            $privatekey = 'UEYZDnaSATmGtwne5vYjBfJBa9loLHTv';
+        if (count($config) < 1 ){
+             return $this->redirect($this->generateUrl('create_server'));
         }
         $response = array();
         $curl = curl_init();
@@ -108,12 +131,10 @@ class DefaultController extends Controller
           $total = htmlentities($values['total']);
           $loop = $loop+1;
           $response[$values['name']] = htmlentities($values['total']);
-            $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('username' => $username));
+          $entity = $em->getRepository('MediashareUserBundle:User')->findBy(array('username' => $username));
             foreach ($entity as $key => $value) {
                 if ($value->getPoints() < $total) {
                     $this->online($today, $value);
-                    //$value->setUpdated(true);
-
                     $value->setPoints($total);
                     $value->setClassement($loop);
 
@@ -122,10 +143,8 @@ class DefaultController extends Controller
                     if ($value->getTimer() <= $today-2) {
                         $value->setConnected(0);
                     }
-                    //$value->setUpdated(false);
                     $value->setClassement($loop);
                 }       
-
 
                 $user_rank = $value->getRanked();
                 $base = 100000;
@@ -137,8 +156,6 @@ class DefaultController extends Controller
                         $value->setNextprogress($base);
                         $value->setRanked(0);
                         $value->setRankedupdated(false);
-                        
-                        
                     }else{
                         $user_rank = 1;
                         $value->setRanked(1);
@@ -157,15 +174,13 @@ class DefaultController extends Controller
                                 // Affichage des paliers
                                 //echo $base; echo "Level :".$levelup."\n";
                             }
-                            
                         }
                         $i++;
                     }
-
-                                $progress = $total*10/$base*2;
-                                //echo $progress."\n";
-                                $value->setProgress(100*$total/$base*2);
-                                $value->setNextprogress($base*2);
+                    $progress = $total*10/$base*2;
+                    //echo $progress."\n";
+                    $value->setProgress(100*$total/$base*2);
+                    $value->setNextprogress($base*2);
                 }
                 $em->persist($value);
                 $em->flush();
@@ -188,20 +203,34 @@ class DefaultController extends Controller
         $em1->flush();
 
     }
+
+    public function loginuserAction($username)
+    {
+        return $this->render('MediashareAppBundle::zero.html.twig');
+    }
     public function sitestatesAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $config = $em->getRepository('MediashareAppBundle:Config')->find(1);
-        $privatekey =$config->getPrivateKey();
-
-        if (!$privatekey) {
-            $privatekey = 'UEYZDnaSATmGtwne5vYjBfJBa9loLHTv';
+        if ($this->getUser()) {
+            $serverName = $this->getUser()->getServerName();
+        }else {
+            $serverName = "L'Escale";
         }
+        if ($serverName == null) {
+            $serverName = "L'Escale";
+        }
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->getRepository('MediashareAppBundle:Config')->findBy(array('name' => $serverName));
+        $privatekey =$config[0]->getPrivateKey();
+
+        if (count($config) < 1 ){
+             return $this->redirect($this->generateUrl('create_server'));
+        }
+        
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => 'https://api.coinhive.com/stats/site?secret='.$privatekey
-    ));
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://api.coinhive.com/stats/site?secret='.$privatekey
+        ));
         $result = curl_exec($curl);
         $json = json_decode($result,true);
         echo $result;
@@ -210,12 +239,18 @@ class DefaultController extends Controller
         $points_total = $json['hashesTotal'];
         $xmr_total = $json['xmrPending'];
 
-        $em = $this->getDoctrine()->getManager();
-            $Server = $em->getRepository('MediashareAppBundle:Server')->find(1);
+        $em2 = $this->getDoctrine()->getManager();
+            $Server = $em2->getRepository('MediashareAppBundle:Server')->find(1);
             $Server->setPointsSeconde($points_seconde);
             $Server->setPointsTotal($points_total);
             $Server->setXmrTotal($xmr_total);
-        $em->persist($Server);
+        $em2->persist($Server);
+        $em2->flush();
+        
+            $config[0]->setPointsSeconde($points_seconde);
+            $config[0]->setPointsTotal($points_total);
+            $config[0]->setXmrTotal($xmr_total);
+        $em->persist($config[0]);
         $em->flush();
 
         return $this->render('MediashareAppBundle::zero.html.twig');

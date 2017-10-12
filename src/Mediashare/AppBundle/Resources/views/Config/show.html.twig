@@ -1,0 +1,87 @@
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+    <div class="login-wrap2">
+        <div class="intro">
+            <h2 class="page-header">
+            Server
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-users"></i> <a href="{{ path('create_server') }}">Servers List</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-eye"></i> Show
+                </li>
+            </ol>
+            
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ entity.name }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% if entity.pointstotal %}{{ entity.pointstotal }} {% else %} 0 {% endif %}<em>Points</em>
+                </div>
+            </div>
+            {% if entity.link|length > 0 %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">External Link</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{{ entity.link }}" target="_blank">Link</a>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Serveur Key</h3>
+                </div>
+                <div class="panel-body">
+                    <h5 class="panel-title">Public Key</h5>
+                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}    {{ entity.publicKey }} {% else %} *********** {% endif %}
+                </div>
+                <div class="panel-body">
+                    <h5 class="panel-title">Private Key</h5>
+                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}   {{ entity.privateKey }} {% else %} *********** {% endif %}
+                </div>
+                
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Server Online ?</h3>
+                </div>
+                <div class="panel-body">
+                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                        {{ form(online_form) }}
+                    {% endif %}
+                    {% if entity.online == 0 %}<a class="btn btn-wanted"><i
+                    class="fa fa-power-off"></i> Server Offline</a>{% else %}
+                    <a href="{{ path('create_server_connexion', {'id':entity.id}) }}" class="btn btn-success"><i
+                    class="fa fa-cogs"></i> Connexion</a>
+                {% endif %}
+            </div>
+        </div>
+
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <a href="{{ path('create_server') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la liste</a>
+                </div>
+            </div>
+            
+            {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <a href="{{ path('create_server_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
+                            class="fa fa-pencil"></i>
+                        Modifier</a>
+                    </div>
+                    <div class="col-lg-6">
+                        {{ form(delete_form) }}
+                    </div>
+                </div>
+            {% endif %}
+
+    </div>
+</div>
+{% endblock fos_user_content %}

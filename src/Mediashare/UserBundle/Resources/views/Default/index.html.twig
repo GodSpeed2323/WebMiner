@@ -1,80 +1,56 @@
-{% extends 'MediashareAppBundle::base.html.twig' %}
-{% block content %}
-<link rel="stylesheet" href="{{ asset('css/profile.css') }}" media="all"/>
-<div class="profile-card">
-	<div class="profile-cover">
-		<div class="profile-avatar">
-			<div class="btns-container">
-				<div class="profile-links">
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+	<div class="login-wrap2">
+		<div class="intro">
+			<h2 class="page-header">
+			Profile
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-user"></i> <a>Profile</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-eye"></i> Voir
+				</li>
+			</ol>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{ username }}</h3>
+				</div>
+				<div class="panel-body">
+					Level {{ leveling }} | {{ points }} Points | Classement #{{ classement}}
 				</div>
 			</div>
-			<a href="#"><img src="http://www.bongbitcoin.com/images/miner.png" height="150px" width="150px" alt="Username" /></a>
-		</div>
-		<div class="profile-details">
-			<h1>Slote</h1>
-			<h6>Mediashare.supp@gmail.com</h6>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Serveur</h3>
+				</div>
+				<div class="panel-body">
+					{{ serverName }}
+				</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Email</h3>
+				</div>
+				<div class="panel-body">
+					{{ email }}
+				</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Your TicketPass</h3>
+				</div>
+				<div class="panel-body">
+					{{ passPhrase2 }}
+				</div>
+			</div>
+			<a href="{{ path('mediashare_app_homepage') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
+			Mine</a>
+			<a href="{{ path('admin_user_edit', { 'id': idUser }) }}" class="btn btn-primary"><i
+				class="fa fa-pencil"></i>
+			Modifier</a>
 		</div>
 	</div>
-	<div class="profile-content">
-		<div id="menu-outer">
-  <div class="table">
-    <ul id="horizontal-list">
-      <li>
-			<div>{{ classement }}</div>
-			Classement
-		</li>
-		<li>
-			<div>{{ leveling }}</div>
-			Level
-		</li>
-		<li>
-			<div>{{ points }}</div>
-			Points
-		</li>
-		<li>
-			<div>{{ nextleveling }}</div>
-			Next Level (Points)
-		</li>
-		<li>
-			<div>{{ passPhrase2 }}</div>
-			Secret Pass
-		</li>
-		<li>
-			<div>Salut tout le monde !</div>
-			Message (150 caractères)
-		</li>
-    </ul>
-  </div>
-</div>
-		<div class="clear"></div>
-	</div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.menu-container').hover(
-        function(){
-            $('.profile-actions').slideDown('fast');
-          $('.list-icon').addClass('active');
-        },
-        function(){
-            $('.profile-actions').slideUp('fast');
-          $('.list-icon').removeClass('active');
-        }
-    );
-    $('.profile-card').mouseleave(function(){
-        $('.profile-actions').slideUp('fast');
-        $('.profile-info').slideUp('fast');
-        $('.profile-map').slideUp('fast');
-    });
-
-    $('.profile-avatar').hover(
-        function(){
-            $('.profile-links').fadeIn('fast');
-        },
-        function(){
-            $('.profile-links').hide();
-        }
-    );;
-});
-</script>
-{% endblock %}
+{% endblock fos_user_content %}

@@ -1,0 +1,44 @@
+create_server:
+    path:     /
+    defaults: { _controller: "MediashareAppBundle:Config:index" }
+
+create_server_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareAppBundle:Config:show" }
+
+create_server_new:
+    path:     /new
+    defaults: { _controller: "MediashareAppBundle:Config:new" }
+
+create_server_create:
+    path:     /create
+    defaults: { _controller: "MediashareAppBundle:Config:create" }
+    methods:  POST
+
+create_server_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareAppBundle:Config:edit" }
+
+create_server_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareAppBundle:Config:update" }
+    methods:  [POST, PUT]
+
+create_server_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareAppBundle:Config:delete" }
+    methods:  [POST, DELETE]
+
+create_server_online:
+    path:     /{id}/online
+    defaults: { _controller: "MediashareAppBundle:Config:online" }
+    methods:  [POST, PUT]
+
+create_server_offline:
+    path:     /{id}/offline
+    defaults: { _controller: "MediashareAppBundle:Config:offline" }
+    methods:  [POST, PUT]
+
+create_server_connexion:
+    path:     /{id}/connexion
+    defaults: { _controller: "MediashareAppBundle:Config:connexion" }

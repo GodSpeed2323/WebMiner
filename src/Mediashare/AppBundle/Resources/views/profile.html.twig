@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>WebMiner | Profile</title>
+        {#<title>{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))|getRef('title') }}</title>#}
+        <meta name="description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale."/>
+        <meta name="keywords" content="WebMiner, Serveur Discord, L'Escale, Miner, Donation, cryptomonnaie, Serveur Discord L'Escal"/>
+        <meta property="og:url" content="http://webminer.slote.me" />
+        <meta property="og:site_name" content="WebMiner" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="WebMiner | Donation System" />
+        <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
+        <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
+        <script src="{{ asset('js/login.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}" media="all"/>
+        <link rel="stylesheet" href="{{ asset('css/background.css') }}" media="all"/>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="all"/>
+        <link rel="stylesheet" href="{{ asset('font-awesome-4.3.0/css/font-awesome.min.css') }}" media="all"/>
+    <style type="text/css">
+    th {
+      text-align: center;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-cogs"></i> <a href="{{ path('mediashare_app_homepage') }}">La Mine</a>
+                </li>
+                <li>
+                    <i class="fa fa-user"></i> <a href="{{ path('user') }}">Profile</a>
+                </li>
+                <li>
+                    <i class="fa fa-server"></i> <a href="{{ path('create_server') }}">Servers List</a>
+                </li>
+                <li>
+                    <i class="fa fa-plus"></i> <a href="{{ path('create_server_new') }}">Create Server</a>
+                </li>
+            </ol>
+        </div>
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+        
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-101987237-2');
+        </script>
+    </body>
+</html>

@@ -7,10 +7,16 @@
       <button type="submit" value="{{ 'registration.submit'|trans }}">Submit</button>
     </div>
   </form>
+  <ol class="breadcrumb">
+    <li>
+      <i class="fa fa-sign-in"></i> <a href="{{ path('fos_user_security_login') }}">Login</a>
+    </li>
+  </ol>
 </div>
 <div class="login-wrap2">
- <div class="intro">
+  <div class="intro">
     {% block info %}
-        {% include 'MediashareAppBundle::_info.html.twig' %}
+      {% include 'MediashareAppBundle::_infoServer.html.twig' %}
     {% endblock %}
+  </div>
 </div>

@@ -22,6 +22,13 @@ class Server
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="idserver", type="integer")
+     */
+    private $idserver;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="points_seconde", type="string", length=255)
@@ -150,5 +157,28 @@ class Server
     public function getXmrTotal()
     {
         return $this->xmrTotal;
+    }
+
+    /**
+     * Set idserver
+     *
+     * @param integer $idserver
+     * @return Server
+     */
+    public function setIdserver($idserver)
+    {
+        $this->idserver = $idserver;
+
+        return $this;
+    }
+
+    /**
+     * Get idserver
+     *
+     * @return integer 
+     */
+    public function getIdserver()
+    {
+        return $this->idserver;
     }
 }

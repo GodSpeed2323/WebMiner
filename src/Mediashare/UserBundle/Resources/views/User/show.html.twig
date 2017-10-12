@@ -1,80 +1,62 @@
-{% extends 'MediashareAdminBundle::base.html.twig' %}
-
-{% block content_right %}
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Page
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Utilisateurs</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-eye"></i> Voir
-            </li>
-        </ol>
-    </div>
-
-    <div class="col-lg-12">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Nom d'utilisateur</h3>
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+    <div class="login-wrap2">
+        <div class="intro">
+            
+            <h2 class="page-header">
+            Profile
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-users"></i> <a href="{{ path('admin_user') }}">Utilisateurs</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-eye"></i> Show
+                </li>
+            </ol>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ entity.username }}</h3>
+                </div>
+                <div class="panel-body">
+                    Level {{ entity.ranked }} | {{ entity.points }} Points
+                </div>
             </div>
-            <div class="panel-body">
-                {{ entity.username }}
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Serveur</h3>
+                </div>
+                <div class="panel-body">
+                    {{ entity.serverName }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Prénom</h3>
+            {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.id %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">TicketPass</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ entity.ticketpass }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Online ?</h3>
+                </div>
+                <div class="panel-body">
+                    {% if entity.connected == true %}{{ 'Oui' }}{% else %}{{ 'Non' }}{% endif %}
+                </div>
             </div>
-            <div class="panel-body">
-                {{ entity.firstName }}
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Nom</h3>
-            </div>
-            <div class="panel-body">
-                {{ entity.lastName }}
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Email</h3>
-            </div>
-            <div class="panel-body">
-                {{ entity.email }}
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Roles</h3>
-            </div>
-            <div class="panel-body">
-                {% for role in entity.roles %}
-                    <p>{{ role }}</p>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Actif ?</h3>
-            </div>
-            <div class="panel-body">
-                {% if entity.enabled == true %}{{ 'Oui' }}{% else %}{{ 'Non' }}{% endif %}
-            </div>
-        </div>
-
-        <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
+            <a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
             liste</a>
-
-        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
+            {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.id %}
+                <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
                     class="fa fa-pencil"></i>
-            Modifier</a>
-        {{ form(delete_form) }}
-        {% endif %}
+                Modifier</a>
+                {{ form(delete_form) }}
+            {% endif %}
+        </div>
     </div>
-{% endblock %}
+{% endblock fos_user_content %}

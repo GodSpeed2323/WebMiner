@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Mediashare\AppBundle\Entity\ConfigRepository;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -15,35 +17,25 @@ class UserType extends AbstractType
             ->add('username', 'text', array(
                 "label" => "Nom d'utilisateur :",
                 'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
+                'label_attr' => array('class' => 'col-lg-3 control-label'),
             ))
-            ->add('firstName', 'text', array(
-                "label" => "Prénom :",
+            ->add('serverName', 'entity', array(
+                'class' => 'MediashareAppBundle:Config',
+                'query_builder' => function (ConfigRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->Where('u.online = true');
+                },
+                "label" => "Serveur :",
+                'property' => 'name',
+                'placeholder' => 'Choisir',
                 'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
-            ))
-            ->add('lastName', 'text', array(
-                "label" => "Nom :",
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
-            ))
-            ->add('color', 'choice', array(
-                'choices' => array(
-                    'red' => 'Rouge',
-                    'orange' => 'Orange',
-                    'green' => 'Vert',
-                    'grey' => 'Gris',
-                    'blue' => 'Bleu',
-                    'yellow' => 'Jaune'
-                ),
-                "label" => "Couleur :",
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
+                'label_attr' => array('class' => 'col-lg-3 control-label'),
+
             ))
             ->add('email', 'text', array(
                 "label" => "Email :",
                 'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
+                'label_attr' => array('class' => 'col-lg-3 control-label'),
             ));
         if ($options['edit'] == true) {
             $builder
@@ -54,12 +46,12 @@ class UserType extends AbstractType
                     'first_options' => array(
                         'label' => 'Mot de passe',
                         'attr' => array('class' => 'form-control'),
-                        'label_attr' => array('class' => 'col-lg-2 control-label')
+                        'label_attr' => array('class' => 'col-lg-3 control-label')
                     ),
                     'second_options' => array(
                         'label' => 'Mot de passe (validation)',
                         'attr' => array('class' => 'form-control'),
-                        'label_attr' => array('class' => 'col-lg-2 control-label')
+                        'label_attr' => array('class' => 'col-lg-3 control-label')
                     )
                 ));
         } else {
@@ -70,37 +62,16 @@ class UserType extends AbstractType
                     'first_options' => array(
                         'label' => 'Mot de passe',
                         'attr' => array('class' => 'form-control'),
-                        'label_attr' => array('class' => 'col-lg-2 control-label')
+                        'label_attr' => array('class' => 'col-lg-3 control-label')
                     ),
                     'second_options' => array(
                         'label' => 'Mot de passe (validation)',
                         'attr' => array('class' => 'form-control'),
-                        'label_attr' => array('class' => 'col-lg-2 control-label')
+                        'label_attr' => array('class' => 'col-lg-3 control-label')
                     )
                 ));
         }
-        $builder
-            ->add('roles', 'choice', array(
-                'label' => 'Roles :',
-                'choices' => $options['roles'],
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => array('class' => 'checkbox'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
-            ))
-            ->add('enabled', 'choice', array(
-                'label' => 'Actif ?',
-                'required' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    '1' => 'Oui',
-                    '0' => 'Non'
-                ),
-                'multiple' => false,
-                'expanded' => true,
-                'attr' => array('class' => 'radio'),
-                'label_attr' => array('class' => 'col-lg-2 control-label'),
-            ));
+
     }
 
     /**

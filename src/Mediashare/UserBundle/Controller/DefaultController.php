@@ -8,34 +8,32 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $idUser = $this->getUser()->getId();
         $leveling = $this->getUser()->getRanked();
-        if ($leveling == null) {
-        	$leveling = 0;
-        }
         $nextleveling = $this->getUser()->getNextprogress();
-        if ($nextleveling == null) {
-        	$nextleveling = 1000000;
-        }
         $username = $this->getUser()->getUsername();
         $email = $this->getUser()->getEmail();
         $points = $this->getUser()->getPoints();
         $classement = $this->getUser()->getClassement();
+        $serverName = $this->getUser()->getServerName();
 
-        $passPhrase2 = $this->randomPassword();
+        $passPhrase2 = $this->randomPassword($idUser);
 
         return $this->render('MediashareUserBundle:Default:index.html.twig', array(
+            'idUser' => $idUser,
             'leveling' => $leveling,
 			'nextleveling' => $nextleveling,
 			'username' => $username,
 			'email' => $email,
 			'points' => $points,
 			'classement' => $classement,
-			'passPhrase2' => $passPhrase2
+			'passPhrase2' => $passPhrase2,
+            'serverName' => $serverName
         ));
 
     }
 
-    function randomPassword() {
+    function randomPassword($idUser) {
 	    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 	    $pass = array(); //remember to declare $pass as an array
 	    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
@@ -45,9 +43,13 @@ class DefaultController extends Controller
 	        $pass[] = $alphabet[$n];
 	    }
 
-	    $idUser = $this->getUser()->getId();
+	    
 	    $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('MediashareUserBundle:User')->find($idUser);
+        $entity->setTicketpass(implode($pass));
+        $em->persist($entity);
+        $em->flush();
+
 
     return implode($pass); //turn the array into a string
 	}

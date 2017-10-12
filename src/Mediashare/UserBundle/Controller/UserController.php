@@ -105,20 +105,24 @@ class UserController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        
+            $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
+            $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find User entity.');
+            }
 
-        $deleteForm = $this->createDeleteForm($id);
+            $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('MediashareUserBundle:User:show.html.twig', array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+            return $this->render('MediashareUserBundle:User:show.html.twig', array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+            ));
+        
+            
+        
     }
 
     /**
@@ -147,22 +151,26 @@ class UserController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($this->getUser()->hasRole('ROLE_ADMIN') | $this->getUser()->getId() == $id) {
+            $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
+            $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find User entity.');
+            }
+
+            $editForm = $this->createEditForm($entity);
+            $deleteForm = $this->createDeleteForm($id);
+
+            return $this->render('MediashareUserBundle:User:edit.html.twig', array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }else{
+            return $this->redirect($this->generateUrl('admin_user'));
         }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('MediashareUserBundle:User:edit.html.twig', array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**
@@ -216,10 +224,11 @@ class UserController extends Controller
             } else {
                 $entity->setPassword($lastPassword);
             }
+
             $entity->setUpdateDate(new \DateTime());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user'));
         }
 
         return $this->render('MediashareUserBundle:User:edit.html.twig', array(
@@ -237,17 +246,19 @@ class UserController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
+        
+        if ($this->getUser()->hasRole('ROLE_ADMIN') | $this->getUser()->getId() == $id) {
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MediashareUserBundle:User')->find($id);
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find User entity.');
+                }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
+                $em->remove($entity);
+                $em->flush();
             }
-
-            $em->remove($entity);
-            $em->flush();
         }
 
         return $this->redirect($this->generateUrl('admin_user'));

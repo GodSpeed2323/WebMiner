@@ -1,0 +1,60 @@
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+    <div class="login-wrap2">
+        <div class="intro">
+            <h2 class="page-header">
+            Servers List
+            </h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-server"></i> Servers List
+                </li>
+            </ol>
+            {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                <a href="{{ path('create_server_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter</a>
+            {% endif %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Server Name</th>
+                        <th>Admin</th>
+                        <th>Points</th>
+                        <th>Points/s</th>
+                        <th style="width: 125px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entity in entities %}
+                        {% if entity.online != 0 or entity.idadmin == app.user.id %}
+                            <tr {% if entity.name == app.user.servername %}class="success"{% endif %}>
+                            <td><a href="{{ path('create_server_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                            <td><a href="{{ path('admin_user_show', { 'id': entity.idadmin }) }}">{{ entity.admin }}</a></td>
+                            <td>{% if entity.pointstotal %}{{ entity.pointstotal }} <em>Points</em>{% else %}<em>Null</em>{% endif %}</td>
+                            <td>{% if entity.pointsseconde %}{{ entity.pointsseconde }} <em>Points/s</em>{% else %}<em>Null</em>{% endif %}</td>
+                            <td>
+                                <div class="btn-group-vertical">
+                                    <a href="{{ path('create_server_show', {'id':entity.id}) }}" class="btn btn-primary"><i
+                                    class="fa fa-eye"></i> Voir</a>
+                                    {% if entity.online != 0 %}<a href="{{ path('create_server_connexion', {'id':entity.id}) }}" class="btn btn-success"><i
+                                    class="fa fa-cogs"></i> Connexion</a>{% endif %}
+                                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                                        <a href="{{ path('create_server_edit', {'id':entity.id}) }}" class="btn btn-info"><i
+                                        class="fa fa-pencil"></i> Modifier</a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="login-wrap2">
+    <div class="intro">
+        {% block info %}
+            {% include 'MediashareAppBundle::_infoServer.html.twig' %}
+        {% endblock %}
+    </div>
+{% endblock fos_user_content %}

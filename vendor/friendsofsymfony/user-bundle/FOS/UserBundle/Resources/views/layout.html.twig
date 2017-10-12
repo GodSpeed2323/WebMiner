@@ -1,69 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>WebMiner | Inscription</title>
-        {#<title>{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))|getRef('title') }}</title>#}
-        <meta name="description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale."/>
-        <meta name="keywords" content="WebMiner, Serveur Discord, L'Escale, Miner, Donation, cryptomonnaie, Serveur Discord L'Escal"/>
-
-        <meta property="og:url" content="http://webminer.slote.me" />
-        <meta property="og:site_name" content="WebMiner" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="WebMiner | Donation System" />
-        <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
-        <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
-
-        <script src="{{ asset('js/login.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
-        <link rel="stylesheet" href="{{ asset('css/login.css') }}" media="all"/>
-        <link rel="stylesheet" href="{{ asset('css/background.css') }}" media="all"/>
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="all"/>
-        <link rel="stylesheet" href="{{ asset('font-awesome-4.3.0/css/font-awesome.min.css') }}" media="all"/>
-    </head>
-    <body>
-<div class="col-xs-12">
-  <ol class="breadcrumb">
-      <li>
-          <i class="fa fa-user"></i> <a href="{{ path('fos_user_security_login') }}">Login</a>
-      </li>
-      <li>
+  <head>
+    <meta charset="UTF-8" />
+    <title>WebMiner | Inscription</title>
+    {#<title>{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))|getRef('title') }}</title>#}
+    <meta name="description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale."/>
+    <meta name="keywords" content="WebMiner, Serveur Discord, L'Escale, Miner, Donation, cryptomonnaie, Serveur Discord L'Escal"/>
+    <meta property="og:url" content="http://webminer.slote.me" />
+    <meta property="og:site_name" content="WebMiner" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WebMiner | Donation System" />
+    <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
+    <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
+    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/background.css') }}" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('font-awesome-4.3.0/css/font-awesome.min.css') }}" media="all"/>
+  </head>
+  <body>
+    <div class="col-xs-12">
+      <ol class="breadcrumb">
+        <li>
+          <i class="fa fa-sign-in"></i> <a href="{{ path('fos_user_security_login') }}">Login</a>
+        </li>
+        <li>
           <i class="fa fa-user"></i> <a href="{{ path('fos_user_registration_register') }}">Register</a>
-      </li>
-  </ol>
-       </div>
-        <!-- <div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-        </div> -->
-
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
+        </li>
+      </ol>
+    </div>
+    
+    {% for type, messages in app.session.flashbag.all() %}
+      {% for message in messages %}
+        <div class="flash-{{ type }}">
+          {{ message }}
         </div>
-        
-        <!-- Global Site Tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-101987237-2');
-        </script>
-    </body>
+      {% endfor %}
+    {% endfor %}
+    <div>
+      {% block fos_user_content %}
+      {% endblock fos_user_content %}
+    </div>
+    
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-101987237-2');
+    </script>
+  </body>
 </html>
