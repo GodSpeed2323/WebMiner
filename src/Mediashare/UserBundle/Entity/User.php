@@ -37,7 +37,7 @@ class User extends BaseUser
     protected $username;
 
     /**
-     * @ORM\Column(type="string", name="serverName", length=255)
+     * @ORM\Column(type="string", name="serverName", length=255, nullable=true)
      */
     protected $serverName;
    

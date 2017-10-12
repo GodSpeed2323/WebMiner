@@ -27,6 +27,7 @@ class UserType extends AbstractType
                 },
                 "label" => "Serveur :",
                 'property' => 'name',
+                'requider' => false,
                 'placeholder' => 'Choisir',
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label'),
