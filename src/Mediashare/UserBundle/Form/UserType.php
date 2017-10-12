@@ -19,20 +19,19 @@ class UserType extends AbstractType
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label'),
             ))
-            // ->add('serverName', 'entity', array(
-            //     'class' => 'MediashareAppBundle:Config',
-            //     'required' => false,
-            //     'query_builder' => function (ConfigRepository $er) {
-            //         return $er->createQueryBuilder('u')
-            //             ->Where('u.online = true');
-            //     },
-            //     "label" => "Serveur :",
-            //     'property' => 'name',
-            //     'placeholder' => 'Choisir',
-            //     'attr' => array('class' => 'form-control'),
-            //     'label_attr' => array('class' => 'col-lg-3 control-label'),
-
-            // ))
+            ->add('serverName', 'entity', array(
+                'required' => false,
+                'class' => 'MediashareAppBundle:Config',
+                'query_builder' => function (ConfigRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->Where('u.online = true');
+                },
+                "label" => "Serveur :",
+                'property' => 'name',
+                'placeholder' => 'Choisir',
+                'attr' => array('class' => 'form-control'),
+                'label_attr' => array('class' => 'col-lg-3 control-label'),
+            ))
             ->add('email', 'text', array(
                 "label" => "Email :",
                 'attr' => array('class' => 'form-control'),

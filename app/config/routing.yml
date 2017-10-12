@@ -25,15 +25,15 @@ _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 
-pageNotFound:
-    pattern:  /{path}
-    defaults: { _controller: MediashareAppBundle:Default:pageNotFound, path: '' }
-    requirements:
-        path: .*
+# pageNotFound:
+#     pattern:  /{path}
+#     defaults: { _controller: MediashareAppBundle:Default:pageNotFound, path: '' }
+#     requirements:
+#         path: .*
 
 
-maintenance:
-    pattern:  /{path}
-    defaults: { _controller: MediashareAppBundle:Default:maintenance, path: '' }
-    requirements:
-        path: .*
+# maintenance:
+#     pattern:  /{path}
+#     defaults: { _controller: MediashareAppBundle:Default:maintenance, path: '' }
+#     requirements:
+#         path: .*

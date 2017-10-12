@@ -228,7 +228,7 @@ class UserController extends Controller
             $entity->setUpdateDate(new \DateTime());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user'));
+            return $this->redirect($this->generateUrl('mediashare_app_homepage'));
         }
 
         return $this->render('MediashareUserBundle:User:edit.html.twig', array(
