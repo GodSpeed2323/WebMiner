@@ -2,19 +2,21 @@
 
 ## Qu'est-ce que c'est ?
 
-WebMiner est un moyen de contribuer au développement de votre Serveur Discord. Cela comprend un site internet sur le qu'elle la communauté devra se connecter pour commencer à Miner du [Monero](). Le Minage utilise le CPU & le Réseau via le Javascript exécuter par le site. Un Bot est installé sur votre Serveur Discord pour permettre l'affichage des Statistiques de la Mine(Classements, Mineurs Online, Total Miner ect...).  
+Nous vous proposons un système de **Leveling** & **Ranking** lié avec une **économie virtuelle** pour votre serveur Discord. Les utilisateurs s'inscrivent sur un site qui leurs permette de Miner une **Crypto-Monnaie** (le Monero), ce qui leurs rapporte des **Points** & à vous de l'**Argents**. Les **Points** sont utilisés pour le **Leveling** & **Ranking**, permettant de récompenser les meilleurs contributeurs. Un **Bot** est connecté sur votre **Serveur Discord** afin d'afficher certaines statistiques de la Mine.
 
-## Pourquoi WebMiner ?
+## Pourquoi l'utilisé ?
 
-Si vous souhaitez participer activement au développement du serveur mais que vous n'avez pas d'argent, vous pourrez contribuer de cette manière ! WebMiner peut rapporté jusqu'à 1€/jours pour un total de 1 000points/s (environ 13 Mineurs), cela peut permettre de proposé des lots conséquents pour les Mineurs les plus investie !
+Si vous souhaitez participer activement au développement du serveur mais que vous n'avez pas d'argent, vous pourrez contribuer de cette manière ! WebMiner peut rapporter **2€/jours** pour un total de 2.000points/s (environ 25 Mineurs), cela peut permettre de proposé des lots conséquents pour les **Mineurs** les plus investie !
+
+**WebMiner est un moyen simple et OpenSource d'aide au développement de votre Serveur Discord.**
 
 ## Comment ça Marche ?
 
-Au moment où vous lancez WebMiner, votre machine mine du Monero, une cryptomonnaie. Le principe est simple : vous devez vous inscrire et cliquer sur le button Start Mining pour commencer à miner.
-En récompense de leurs efforts, les Mineurs gagnent des points pour le Serveur Discord, et pourront ainsi évoluer dans le Ranking du serveur.
-Un classement des mineurs est disponible sur le site & le bot (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
+Au moment où vous lancez WebMiner, votre machine mine du **Monero**, une cryptomonnaie. Le principe est simple : Votre ordinateur va alors résoudre des calculs, ceux-ci permettent la validation de transaction en Monero et la création d'une petite partie de la crypto-monnaie. L'algorithme utilise principalement le **CPU** & le **Réseau** via une exécution **Javascript** sur le site.
+En récompense de leurs efforts, les **Mineurs** gagnent des points, qui peuvent être utilisé sur des **plateformes communautaires** comme **Discord**, ils pourront ainsi évoluer dans le Ranking du serveur.
+Un **Classement** des mineurs est disponible sur le **site** & le **bo** (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
 
-#### [Demo](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/NKSwDgK)
+#### [Site](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/NKSwDgK)
 
 ## Getting Started
 
@@ -36,32 +38,38 @@ Download & Installation
 git clone https://github.com/Mediashare/WebMiner
 cd WebMiner/
 composer install
+ # Enter Configuration
+php app/console doctrine:database:create
+php app/console doctrine:schema:update --force
+
 ```
-Import sql Db [Db_WebMiner](web/Db_WebMiner)
 
 
 ## Contact
 * [Discord]
   * Name : L'Escale
+  * Username : @Slote
   * Url : https://discord.gg/NKSwDgK
 
+* [Twitter]
+  * @Mediashare_Supp
+  
 * [Irc]
-  * Host : irc.slote.me
+  * Host : irc.slote.me (offline)
   * Port : 6667
 
 * [Mail]
   * admin@slote.me
   * Mediashare.supp@gmail.com
   * Marquand.Thibault@gmail.com
+  
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Donate
-My BitCoin Address : 1NFoAx12XazvYZH7G8vZfo8ibyFoJiQc3v
-
-WebMiner : http://WebMiner.slote.me
+My BitCoin Address : 1NFoAx12XazvYZH7G8vZfo8ibyFoJiQc3v || Mining with WebMiner : http://WebMiner.slote.me
 
 ## Versioning
 
