@@ -19,7 +19,7 @@
 					<h3 class="panel-title">{{ username }}</h3>
 				</div>
 				<div class="panel-body">
-					Level {{ leveling }} | {{ points }} Points | Classement #{{ classement}}
+					Level {{ leveling }} | {{ points|number_format(0,',', ' ') }} Points | Classement #{{ classement}}
 				</div>
 			</div>
 			<div class="panel panel-info">
