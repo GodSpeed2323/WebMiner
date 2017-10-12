@@ -20,7 +20,7 @@ class UserType extends AbstractType
                 'label_attr' => array('class' => 'col-lg-3 control-label'),
             ))
             ->add('serverName', 'entity', array(
-                'required' => false,
+                'required' => true,
                 'class' => 'MediashareAppBundle:Config',
                 'query_builder' => function (ConfigRepository $er) {
                     return $er->createQueryBuilder('u')
