@@ -32,8 +32,8 @@ pageNotFound:
         path: .*
 
 
-maintenance:
-    pattern:  /{path}
-    defaults: { _controller: MediashareAppBundle:Default:maintenance, path: '' }
-    requirements:
-        path: .*
+# maintenance:
+#     pattern:  /{path}
+#     defaults: { _controller: MediashareAppBundle:Default:maintenance, path: '' }
+#     requirements:
+#         path: .*
