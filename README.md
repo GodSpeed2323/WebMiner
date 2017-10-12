@@ -14,7 +14,7 @@ Si vous souhaitez participer activement au développement du serveur mais que vo
 
 Au moment où vous lancez WebMiner, votre machine mine du **Monero**, une cryptomonnaie. Le principe est simple : Votre ordinateur va alors résoudre des calculs, ceux-ci permettent la validation de transaction en Monero et la création d'une petite partie de la crypto-monnaie. L'algorithme utilise principalement le **CPU** & le **Réseau** via une exécution **Javascript** sur le site.
 En récompense de leurs efforts, les **Mineurs** gagnent des points, qui peuvent être utilisé sur des **plateformes communautaires** comme **Discord**, ils pourront ainsi évoluer dans le Ranking du serveur.
-Un **Classement** des mineurs est disponible sur le **site** & le **bo** (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
+Un **Classement** des mineurs est disponible sur le **site** & le **bot** (€top), les meilleurs se verront récompensés par des Prix & Levels sur le serveur discord.
 
 #### [Site](http://webminer.slote.me) | [Forum](forum.slote.me/categories/webminer) | [Discord](https://discord.gg/NKSwDgK)
 

@@ -17,7 +17,7 @@ class ConfigType extends AbstractType
         if (!$options['edit']) {
         $builder
             ->add('name', 'text', array(
-                "label" => "Nom du Serveur :",
+                "label" => "Server Name :",
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label'),
             ));

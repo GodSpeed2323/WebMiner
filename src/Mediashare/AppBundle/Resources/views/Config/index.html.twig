@@ -2,13 +2,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block fos_user_content %}
     <div class="login-wrap2">
+
+
         <div class="intro">
             <h2 class="page-header">
             <i class="fa fa-server"></i> Servers List
             </h2>
             <ol class="breadcrumb">
                 <li class="active">
-                    Select a Server
+                    Select a Server for start Mining or Create Your Server <a href="{{ path('create_server_new') }}">Here</a>.
                 </li>
             </ol>
             {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
