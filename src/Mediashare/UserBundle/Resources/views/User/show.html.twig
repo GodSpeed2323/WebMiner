@@ -20,7 +20,7 @@
                     <h3 class="panel-title">{{ entity.username }}</h3>
                 </div>
                 <div class="panel-body">
-                    Level {{ entity.ranked }} | {{ entity.points }} Points
+                    Level {{ entity.ranked }} | {{ entity.points|number_format(0,',', ' ') }} Points
                 </div>
             </div>
             <div class="panel panel-info">

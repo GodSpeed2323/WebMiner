@@ -46,11 +46,10 @@
 					{{ passPhrase2 }}
 				</div>
 			</div>
-			<a href="{{ path('mediashare_app_homepage') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Retour à la
-			Mine</a>
+			<a href="{{ path('admin_user') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the Users List </a>
 			<a href="{{ path('admin_user_edit', { 'id': idUser }) }}" class="btn btn-primary"><i
 				class="fa fa-pencil"></i>
-			Modifier</a>
+			Update</a>
 		</div>
 	</div>
 {% endblock fos_user_content %}

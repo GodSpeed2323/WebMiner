@@ -32,7 +32,7 @@
                             <tr class="{% if entity.name == app.user.servername %}success{% endif %}{% if entity.online == 0 %}danger{% endif %}">
                             <td><a href="{{ path('create_server_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
                             <td><a href="{{ path('admin_user_show', { 'id': entity.idadmin }) }}">{{ entity.admin }}</a></td>
-                            <td>{% if entity.pointstotal %}{{ entity.pointstotal }} <em>Points</em>{% else %}<em>Null</em>{% endif %}</td>
+                            <td>{% if entity.pointstotal %}{{ entity.pointstotal|number_format(0,',', ' ') }} <em>Points</em>{% else %}<em>Null</em>{% endif %}</td>
                             <td>{% if entity.pointsseconde %}{{ entity.pointsseconde }} <em>Points/s</em>{% else %}<em>Null</em>{% endif %}</td>
                             <td>
                                 <div class="btn-group-vertical">

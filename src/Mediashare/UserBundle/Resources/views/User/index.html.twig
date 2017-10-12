@@ -31,7 +31,7 @@
                         <tr {% if entity.connected == true %}class="success"{% else %}class="danger"{% endif %}>
                         <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                         <td>{{ entity.classement }}</td>
-                        <td>{{ entity.points }}</td>
+                        <td>{{ entity.points|number_format(0,',', ' ') }}</td>
                         <td>{{ entity.ranked }}</td>
                         <td>{{ entity.serverName }}</td>
                         <td>{% if entity.connected == true %}{{ 'Connected' }}{% else %}{{ 'Offline' }}{% endif %}</td>
