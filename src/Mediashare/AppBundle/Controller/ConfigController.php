@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mediashare\AppBundle\Entity\Config;
-use Mediashare\AppBundle\Entity\Server;
 use Mediashare\AppBundle\Form\ConfigType;
 
 /**
@@ -38,12 +37,11 @@ class ConfigController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MediashareAppBundle:Config')->find($id);
-        $serverName = $entity->getName();
         $idUser = $this->getUser()->getId();
-
         $user = $em->getRepository('MediashareUserBundle:User')->find($idUser);
-        $user->setServerName($serverName);
+        $config = $em->getRepository('MediashareAppBundle:Config')->find($id);
+        $user->setConfig($id);
+        $user->setServername($config->getName());
 
         $em->persist($user);
         $em->flush();
@@ -59,40 +57,41 @@ class ConfigController extends Controller
         $entity = new Config();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $error = false;
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            
-            $idadmin = $this->getUser()->getId();
-            $admin = $this->getUser()->getUsername();
-            $entity->setidAdmin($idadmin);
-            $entity->setAdmin($admin);
-            $entity->setOnline(true);
+            $token = $form->getData()->getPrivatekey();
+            $response = array();
+            $curl = curl_init();
+            // Test Token
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => 'https://api.coinhive.com/user/top?secret='.$token.'&count=100'
+            ));
+            $result = curl_exec($curl);
+            $json = json_decode($result,true);
+            if ($json['success'] == true ) {
+                $em = $this->getDoctrine()->getManager();
+                
+                $idadmin = $this->getUser()->getId();
+                $admin = $this->getUser()->getUsername();
+                $entity->setidAdmin($idadmin);
+                $entity->setAdmin($admin);
+                $entity->setOnline(true);
 
-            
+                $em->persist($entity);
+                $em->flush();
 
-            $em->persist($entity);
-            $em->flush();
-            $idServer = $entity->getId();
-
-            $server = new Server();
-            $server->setIdserver($idServer);
-            $server->setPointsSeconde(1);
-            $server->setPointsTotal(1);
-            $server->setXmrTotal(1);
-            $server->setNbonline(0);
-            
-            $em->persist($server);
-            $em->flush();
-
-
-            // return $this->redirect($this->generateUrl('create_server_show', array('id' => $entity->getId())));
-            return $this->redirect($this->generateUrl('create_server'));
+                // return $this->redirect($this->generateUrl('create_server_show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('create_server'));
+            }else{
+                $error = "Your CoinHive Api Keys is not valid !";
+            }
         }
 
         return $this->render('MediashareAppBundle:Config:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error' => $error,
         ));
     }
 
@@ -131,6 +130,7 @@ class ConfigController extends Controller
         return $this->render('MediashareAppBundle:Config:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error' => $error = null
         ));
     }
 
@@ -144,7 +144,7 @@ class ConfigController extends Controller
 
         $entity = $em->getRepository('MediashareAppBundle:Config')->find($id);
         $serverName = $entity->getName();
-        $users = $em->getRepository('MediashareUserBundle:User')->findBy(array('serverName' => $serverName), array('classement' => 'ASC'));
+        $users = $em->getRepository('MediashareAppBundle:Top')->findBy(array('idconfig' => $id), array('classement' => 'ASC'));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Config entity.');
@@ -161,7 +161,7 @@ class ConfigController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
             'online_form' => $onlineForm->createView(),
-            'users' => $users
+            'users' => $users,
         ));
     }
 

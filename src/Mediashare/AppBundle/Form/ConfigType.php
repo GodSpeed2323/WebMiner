@@ -23,8 +23,14 @@ class ConfigType extends AbstractType
             ));
         }
         $builder
+            ->add('description', 'textarea', array(
+                "label" => "Description :",
+                'required' => false,
+                'attr' => array('class' => 'froala-editor form-control'),
+                'label_attr' => array('class' => 'col-lg-3 control-label'),
+            ))
             ->add('link', 'text', array(
-                "label" => "Link Url :",
+                "label" => "External Link :",
                 'required' => false,
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label'),

@@ -48,6 +48,13 @@ class Config
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="admin", type="string", length=255)
      */
     private $admin;
@@ -88,16 +95,16 @@ class Config
     private $online;
     
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="points_seconde", type="string", length=255, nullable=true)
+     * @ORM\Column(name="points_seconde", type="integer", nullable=true)
      */
     private $pointsSeconde;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="points_total", type="string", length=255, nullable=true)
+     * @ORM\Column(name="points_total", type="float", nullable=true)
      */
     private $pointsTotal;
 
@@ -381,5 +388,51 @@ class Config
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Config
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set servername
+     *
+     * @param string $servername
+     * @return Config
+     */
+    public function setServername($servername)
+    {
+        $this->servername = $servername;
+
+        return $this;
+    }
+
+    /**
+     * Get servername
+     *
+     * @return string 
+     */
+    public function getServername()
+    {
+        return $this->servername;
     }
 }

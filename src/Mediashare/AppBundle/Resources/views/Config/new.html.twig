@@ -2,6 +2,22 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block fos_user_content %}
     <div class="login-wrap2">
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+        <!-- Include JS file. -->
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/js/froala_editor.min.js'></script>
+          <script>
+          $(function() {
+            $('textarea.froala-editor').froalaEditor()
+          });
+        </script>
+
+
+        {% if error %}
+            <div class="alert alert-danger">
+              {{error}}
+            </div>
+        {% endif %}
         <h2 class="page-header"><i class="fa fa-plus"></i> Create your Server</h2>
         {{ form_start(form, {'attr': {'class':'form-horizontal' }}) }}
         <fieldset>
@@ -10,6 +26,13 @@
                 <div class="col-lg-9">
                     {{ form_errors(form.name) }}
                     {{ form_widget(form.name) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                <div class="col-lg-9">
+                    {{ form_errors(form.description) }}
+                    {{ form_widget(form.description) }}
                 </div>
             </div>
             <div class="form-group">

@@ -16,6 +16,9 @@ sitesstates:
 loginuser:
     path:     /api/loginUser/{username}
     defaults: { _controller: MediashareAppBundle:Default:loginuser }
+update_api:
+    path:     /api/update
+    defaults: { _controller: MediashareAppBundle:Top:update }
 
 
 mediashare_app_sitemap:
@@ -38,3 +41,7 @@ mediashare_app_awsindex:
 mediashare_app_stats:
     path:     /pwstats
     defaults: { _controller: MediashareAppBundle:Default:stats }
+
+update:
+    path:     /update
+    defaults: { _controller: MediashareAppBundle:Top:update }

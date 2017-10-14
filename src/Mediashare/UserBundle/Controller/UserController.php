@@ -112,7 +112,33 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
+            $em = $this->getDoctrine()->getManager();
+            $servers = $em->getRepository('MediashareAppBundle:Top')->findBy(array('iduser' => $id), array('points' => 'DESC'));
 
+            $deleteForm = $this->createDeleteForm($id);
+
+            return $this->render('MediashareUserBundle:User:show.html.twig', array(
+                'entity' => $entity,
+                'servers' => $servers,
+                'delete_form' => $deleteForm->createView(),
+            ));       
+    }
+
+    /**
+     * Finds and displays a User entity.
+     *
+     */
+    public function showStringAction($username)
+    {
+            $em = $this->getDoctrine()->getManager();
+
+            $entity = $em->getRepository('MediashareUserBundle:User')->findOneBy(array('username' => $username));
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find User entity.');
+            }
+
+            $id = $entity->getId();
             $deleteForm = $this->createDeleteForm($id);
 
             return $this->render('MediashareUserBundle:User:show.html.twig', array(

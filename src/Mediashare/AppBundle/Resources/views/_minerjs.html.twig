@@ -197,8 +197,12 @@
         function updateConnected() {
             $(".online").html(htmlUnescape("| "+connected)).text();
         }
+
+        update = setInterval(function() {
+            $.get("api/update", function() {});
+        }, 90000);
         setInterval(updateStats, 10000);
-        setInterval(updateProfile, 1000);
+        setInterval(updateProfile, 6000);
 
         function startLogger() {
             status = setInterval(function() {

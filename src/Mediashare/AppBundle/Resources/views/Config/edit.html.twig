@@ -1,16 +1,32 @@
 {% extends "MediashareAppBundle::profile.html.twig" %}
-
 {% block fos_user_content %}
- 
-<div class="login-wrap2">
-  <h2 class="page-header"><i class="fa fa-server"></i> Update Server {{ entity.name }} </h2>
-     {{ form_start(edit_form, {'attr': {'class':'form-horizontal' }}) }}
+    
+    <div class="login-wrap2">
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+        <!-- Include JS file. -->
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/js/froala_editor.min.js'></script>
+          <script>
+          $(function() {
+            $('textarea.froala-editor').froalaEditor()
+          });
+        </script>
+
+        <h2 class="page-header"><i class="fa fa-server"></i> Update Server {{ entity.name }} </h2>
+        {{ form_start(edit_form, {'attr': {'class':'form-horizontal' }}) }}
         <fieldset>
             <div class="form-group">
                 {{ form_label(edit_form.link) }}
                 <div class="col-lg-9">
                     {{ form_errors(edit_form.link) }}
                     {{ form_widget(edit_form.link) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.description) }}
+                <div class="col-lg-9">
+                    {{ form_errors(edit_form.description) }}
+                    {{ form_widget(edit_form.description) }}
                 </div>
             </div>
             <div class="form-group">
@@ -39,11 +55,11 @@
                 </div>
             </div>
         </fieldset>
-</div>
-<div class="login-wrap2">
- <div class="intro">
-    {% block info %}
-        {% include 'MediashareAppBundle::_infoServer.html.twig' %}
-    {% endblock %}
-</div>
-{% endblock fos_user_content %}
+    </div>
+    <div class="login-wrap2">
+        <div class="intro">
+            {% block info %}
+                {% include 'MediashareAppBundle::_infoServer.html.twig' %}
+            {% endblock %}
+        </div>
+    {% endblock fos_user_content %}

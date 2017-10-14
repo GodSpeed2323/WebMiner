@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>WebMiner</title>
-    {#<title>{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))|getRef('title') }}</title>#}
-    <meta name="description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale."/>
-    <meta name="keywords" content="WebMiner, Serveur Discord, L'Escale, Miner, Donation, cryptomonnaie, Serveur Discord L'Escal"/>
-    <meta name="google-site-verification" content="wI5s1Em_zW_pDaVbtU_FcqRsgK1xzNMuqHw66KcRfxE" />
-    
-    <meta property="og:url" content="http://webminer.slote.me" />
-    <meta property="og:site_name" content="WebMiner" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="WebMiner | Donation System" />
-    <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
-    <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
-    <script src="{{ asset('scripts/coinhive.min.js') }}"></script>
-    <script src="{{ asset('scripts/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('scripts/miner.js?v1') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('scripts/jquery.cookie-1.4.1.min.js') }}"></script>
-    <script src="{{ asset('scripts/Chart.min.js') }}"></script>
-    
-    <!-- Front  -->
-    <link rel="stylesheet" href="{{ asset('css/struct.css') }}" media="all"/>
-    <link rel="stylesheet" href="{{ asset('css/list.css') }}" media="all"/>
-    <script src="{{ asset('js/struct.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('scripts/styles.css') }}" media="all"/>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" media="all"/>
-    <!--[if IE]>
-    <style media="screen">
-    .myhr{margin:-0.45em 0}
-    </style>
-    <meta http-equiv="imagetoolbar" content="no" />
-    <![endif]-->
-  </head>
-  <body>
-    {% block body %}
-    {% block header %}
-            {{ render(controller('MediashareAppBundle:Default:header', {'idConfig': idConfig })) }}
-    {% endblock %}
-      <div class="container-text">
-          <section id="content">
-            <noscript>
-            <dl id="jserror">
-              <dt>Attention</dt>
-              <dd>Si vous souhaitez utiliser pleinement toutes les capacités de ce site Internet vous devez activer javascript dans votre
-              navigateur</dd>
-            </dl>
-            </noscript>
-            {% block content %}
+    <head>
+        <meta charset="UTF-8"/>
+        <title>WebMiner</title>
+        {#<title>{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))|getRef('title') }}</title>#}
+        <meta name="description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale."/>
+        <meta name="keywords" content="WebMiner, Serveur Discord, L'Escale, Miner, Donation, cryptomonnaie, Serveur Discord L'Escal"/>
+        <meta name="google-site-verification" content="wI5s1Em_zW_pDaVbtU_FcqRsgK1xzNMuqHw66KcRfxE" />
+        
+        <meta property="og:url" content="http://webminer.slote.me" />
+        <meta property="og:site_name" content="WebMiner" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="WebMiner | Donation System" />
+        <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
+        <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
+        <script src="{{ asset('scripts/coinhive.min.js') }}"></script>
+        <script src="{{ asset('scripts/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('scripts/miner.js?v1') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('scripts/jquery.cookie-1.4.1.min.js') }}"></script>
+        <script src="{{ asset('scripts/Chart.min.js') }}"></script>
+        
+        <!-- Front  -->
+        <link rel="stylesheet" href="{{ asset('css/struct.css') }}" media="all"/>
+        <link rel="stylesheet" href="{{ asset('css/list.css') }}" media="all"/>
+        <script src="{{ asset('js/struct.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('scripts/styles.css') }}" media="all"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" media="all"/>
+        <!--[if IE]>
+        <style media="screen">
+        .myhr{margin:-0.45em 0}
+        </style>
+        <meta http-equiv="imagetoolbar" content="no" />
+        <![endif]-->
+    </head>
+    <body>
+        {% block body %}
+            {% block header %}
+                {{ render(controller('MediashareAppBundle:Default:header', {'idConfig': idConfig })) }}
+            {% endblock %}
+            <div class="container-text">
+                <section id="content">
+                    <noscript>
+                    <dl id="jserror">
+                        <dt>Attention</dt>
+                        <dd>Si vous souhaitez utiliser pleinement toutes les capacités de ce site Internet vous devez activer javascript dans votre
+                        navigateur</dd>
+                    </dl>
+                    </noscript>
+                    {% block content %}
+                    {% endblock %}
+                    
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- WebMiner Pub -->
+                    <ins class="adsbygoogle"
+                    style="display:inline-block;width:728px;height:90px"
+                    data-ad-client="ca-pub-5281743992366973"
+                    data-ad-slot="8555968175"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </section>
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            {% block minerjs %}
+                {{ render(controller('MediashareAppBundle:Default:minerjs')) }}
             {% endblock %}
             
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- WebMiner Pub -->
-            <ins class="adsbygoogle"
-            style="display:inline-block;width:728px;height:90px"
-            data-ad-client="ca-pub-5281743992366973"
-            data-ad-slot="8555968175"></ins>
-            <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </section>
-      </div>
-    {% endblock %}
-    {% block javascripts %}
-
-    {% block minerjs %}
-        {{ render(controller('MediashareAppBundle:Default:minerjs')) }}
-    {% endblock %}
-    
-    {% endblock %}
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-101987237-2');
-    </script>
-  </body>
+        {% endblock %}
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-101987237-2');
+        </script>
+    </body>
 </html>

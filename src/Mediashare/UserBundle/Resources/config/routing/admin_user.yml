@@ -6,6 +6,10 @@ admin_user_show:
     path:     /{id}/show
     defaults: { _controller: "MediashareUserBundle:User:show" }
 
+admin_user_show_string:
+    path:     /{username}/profile
+    defaults: { _controller: "MediashareUserBundle:User:showString" }
+
 admin_user_new:
     path:     /new
     defaults: { _controller: "MediashareUserBundle:User:new" }

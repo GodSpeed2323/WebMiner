@@ -2,7 +2,7 @@
 {% block content %}
     <div class="intro">
         {% block info %}
-            {% include 'MediashareAppBundle::_info.html.twig' %}
+            {{ render(controller('MediashareAppBundle:Default:info')) }}
         {% endblock %}
         <hr class="separte"></hr>
         <div class="miner">

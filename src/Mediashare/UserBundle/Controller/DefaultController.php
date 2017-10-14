@@ -9,6 +9,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $idUser = $this->getUser()->getId();
+        $idConfig = $this->getUser()->getConfig();
         $leveling = $this->getUser()->getRanked();
         $nextleveling = $this->getUser()->getNextprogress();
         $username = $this->getUser()->getUsername();
@@ -19,6 +20,10 @@ class DefaultController extends Controller
 
         $passPhrase2 = $this->randomPassword($idUser);
 
+        $em = $this->getDoctrine()->getManager();
+        $servers = $em->getRepository('MediashareAppBundle:Top')->findBy(array('iduser' => $idUser), array('points' => 'DESC'));
+
+
         return $this->render('MediashareUserBundle:Default:index.html.twig', array(
             'idUser' => $idUser,
             'leveling' => $leveling,
@@ -28,7 +33,8 @@ class DefaultController extends Controller
 			'points' => $points,
 			'classement' => $classement,
 			'passPhrase2' => $passPhrase2,
-            'serverName' => $serverName
+            'serverName' => $serverName,
+            'entities' => $servers
         ));
 
     }

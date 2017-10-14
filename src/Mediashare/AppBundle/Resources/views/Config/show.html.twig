@@ -5,9 +5,8 @@
         <div class="intro">
             <h2 class="page-header">
             <i class="fa fa-server"></i>
-            Server
+            {{ entity.name }}
             </h2>
-
             
             <ol class="breadcrumb">
                 <li>
@@ -17,127 +16,133 @@
                     <i class="fa fa-eye"></i> Show
                 </li>
             </ol>
-             <div class="panel panel-info">
-                <div class="panel-body">
-                   <div class="col-lg-12">
-                    {% if entity.online != 0 %}
-                    <a href="{{ path('create_server_connexion', {'id':entity.id}) }}" class="btn btn-success"><i
-                    class="fa fa-cogs"></i> Connexion</a>
-                    {% endif %}
-                    {% if entity.online == 0 %}<a class="btn btn-danger"><i
-                    class="fa fa-power-off"></i> Server Offline</a>
-                {% endif %}
-            </div>
-                </div>
-            </div>
-            <div class="panel panel-info">
+            <div class="panel panel-info col-lg-4">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ entity.name }}</h3>
+                    <h3 class="panel-title">Points</h3>
                 </div>
                 <div class="panel-body">
-                    {% if entity.pointstotal %}{{ entity.pointstotal|number_format(0,',', ' ') }} {% else %} 0 {% endif %}<em>Points</em> | {{ entity.pointsseconde }} P/s 
+                    {% if entity.pointstotal %}{{ entity.pointstotal|number_format(0,',', ' ') }} {% else %} 0 {% endif %}<em>Points</em>
                 </div>
             </div>
-            {% if entity.link|length > 0 %}
-                <div class="panel panel-info">
+            <div class="panel panel-info col-lg-4">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Points par seconde</h3>
+                </div>
+                <div class="panel-body">
+                    {{ entity.pointsseconde }} P/s
+                </div>
+            </div>
+                <div class="panel panel-info col-lg-4">
                     <div class="panel-heading">
                         <h3 class="panel-title">External Link</h3>
                     </div>
                     <div class="panel-body">
-                        <a href="{{ entity.link }}" target="_blank">Link</a>
+                       {% if entity.link|length > 0 %}<a href="{{ entity.link }}" target="_blank">Link</a>{% else %}None{% endif %}
+                    </div>
+                </div>
+            <div class="panel panel-info col-lg-12">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Description</h3>
+                </div>
+                <div class="panel-body">
+                    {{ entity.description|raw}}
+                </div>
+            </div>
+            {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                <div class="panel panel-info col-lg-12">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">CoinHive Server Key</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h5 class="panel-title">Public Key</h5>    {{ entity.publicKey }}
+                    </div>
+                    <div class="panel-body">
+                        <h5 class="panel-title">Private Key</h5>
+                        {{ entity.privateKey }}
                     </div>
                 </div>
             {% endif %}
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">CoinHive Server Key</h3>
-                </div>
                 <div class="panel-body">
-                    <h5 class="panel-title">Public Key</h5>
-                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}    {{ entity.publicKey }} {% else %} *********** {% endif %}
+                    <div class="col-lg-12">
+                        {% if entity.online != 0 %}
+                            <a href="{{ path('create_server_connexion', {'id':entity.id}) }}" class="btn btn-success"><i
+                            class="fa fa-cogs"></i> Connexion</a>
+                        {% else %}
+                            <a class="btn btn-danger"><i class="fa fa-power-off"></i> Server Offline</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <h5 class="panel-title">Private Key</h5>
-                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}   {{ entity.privateKey }} {% else %} *********** {% endif %}
-                </div>
-                
             </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Server Online ?</h3>
-                </div>
-                <div class="panel-body">
-                    {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+            {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        
                         {{ form(online_form) }}
-                    {% endif %}
-            </div>
-        </div>
-        
-        {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
-            <a href="{{ path('create_server_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
-                class="fa fa-pencil"></i>
-            Update</a>
-            
-            <div class="col-lg-4">
+                        
+                    </div>
+                </div>
             {% endif %}
-            <a href="{{ path('create_server') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the list</a>
             
             {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
-            </div>
-            <div class="col-lg-4 center">
-                {{ form(delete_form) }}
-            </div>
-        {% endif %}
+                <a href="{{ path('create_server_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
+                    class="fa fa-pencil"></i>
+                Update</a>
+                
+                <div class="col-lg-4">
+                {% endif %}
+                <a href="{{ path('create_server') }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Back to the list</a>
+                
+                {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                </div>
+                <div class="col-lg-4 center">
+                    {{ form(delete_form) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
-<div class="login-wrap2">
-    <div class="intro">
-        <h2 class="page-header">
-        <i class="fa fa-user"></i> List of Users 
-        </h2>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-users"></i> Users
-            </li>
-        </ol>
-        {% if app.user.hasRole('ROLE_ADMIN') %}
-            <a href="{{ path('admin_user_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
-        {% endif %}
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Classement</th>
-                    <th>Points</th>
-                    <th>Level</th>
-                    <th>Server</th>
-                    <th>Online ?</th>
-                    <th style="width: 125px;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for entity in users %}
-                    <tr {% if entity.connected == true %}class="success"{% else %}class="danger"{% endif %}>
-                    <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
-                    <td>{{ entity.classement }}</td>
-                    <td>{{ entity.points|number_format(0,',', ' ') }}</td>
-                    <td>{{ entity.ranked }}</td>
-                    <td>{{ entity.serverName }}</td>
-                    <td>{% if entity.connected == true %}{{ 'Connected' }}{% else %}{{ 'Offline' }}{% endif %}</td>
-                    <td>
-                        <div class="btn-group-vertical">
-                            <a href="{{ path('admin_user_show', {'id':entity.id}) }}" class="btn btn-primary"><i
-                            class="fa fa-eye"></i> Show</a>
-                            {% if app.user.hasRole('ROLE_ADMIN') %}
-                                <a href="{{ path('admin_user_edit', {'id':entity.id}) }}" class="btn btn-primary"><i
-                                class="fa fa-pencil"></i> Update</a>
-                            {% endif %}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+    <div class="login-wrap2">
+        <div class="intro">
+            <h2 class="page-header">
+            <i class="fa fa-user"></i> List of Users
+            </h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-users"></i> Users
+                </li>
+            </ol>
+            {% if app.user.hasRole('ROLE_ADMIN') %}
+                <a href="{{ path('admin_user_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add</a>
+            {% endif %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Classement</th>
+                        <th>Points</th>
+                        <th>Level</th>
+                        <th>Online</th>
+                        <th style="width: 125px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entity in users %}
+                        <tr {% if entity.connected == true %}class="success"{% else %}class="danger"{% endif %}>
+                        <td><a href="{{ path('admin_user_show_string', { 'username': entity.username }) }}">{{ entity.username }}</a></td>
+                        <td>{{ entity.classement }}</td>
+                        <td>{{ entity.points|number_format(0,',', ' ') }}</td>
+                        <td>{{ entity.ranked }}</td>
+                        <td>{% if entity.connected == true %}{{ 'Connected' }}{% else %}{{ 'Offline' }}{% endif %}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                                <a href="{{ path('admin_user_show_string', {'username':entity.username}) }}" class="btn btn-primary"><i
+                                class="fa fa-eye"></i> Show</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock fos_user_content %}
