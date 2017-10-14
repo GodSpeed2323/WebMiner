@@ -113,7 +113,7 @@ class DefaultController extends Controller
         ));
     }
 
-    public function createTop($iduser_json, $idconfig_json, $total_json, $em, $today, $username_json)
+    public function createTop($iduser_json, $idconfig_json, $serverName, $total_json, $em, $today, $username_json)
     {
         $top = new Top();
 
@@ -154,6 +154,7 @@ class DefaultController extends Controller
         $config = $em->getRepository('MediashareAppBundle:Config')->find($idConfig);
         $publickey = $config->getPublicKey();
         $privatekey = $config->getPrivateKey();
+        $serverName = $config->getName();
 
         $today = date("mdHi");
         $loop = 0;
@@ -187,7 +188,7 @@ class DefaultController extends Controller
           $top = $em->getRepository('MediashareAppBundle:Top')->findOneBy(array('iduser' => $iduser_json, 'idconfig' => $idConfig));
           // Create a Top if not exist
           if (!$top) {
-            $this->createTop($iduser_json, $idconfig_json, $total_json, $em, $today, $username_json);
+            $this->createTop($iduser_json, $idconfig_json, $serverName, $total_json, $em, $today, $username_json);
           } 
 
             $top->setUsername($username_json);
