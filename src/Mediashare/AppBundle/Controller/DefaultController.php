@@ -190,7 +190,7 @@ class DefaultController extends Controller
           // Create a Top if not exist
           if (!$top) {
             $this->createTop($iduser_json, $idconfig_json, $serverName, $total_json, $em, $today, $username_json);
-          } 
+          } else {
 
             $top->setUsername($username_json);
         // Test if Points update
@@ -248,6 +248,7 @@ class DefaultController extends Controller
             }
             $em->persist($top);
             $em->flush();
+            }
         }
     }
     echo json_encode($response);
