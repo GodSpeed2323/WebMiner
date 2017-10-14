@@ -26,7 +26,7 @@ class ConfigType extends AbstractType
             ->add('description', 'textarea', array(
                 "label" => "Description :",
                 'required' => false,
-                'attr' => array('class' => 'froala-editor form-control'),
+                'attr' => array('class' => ''),
                 'label_attr' => array('class' => 'col-lg-3 control-label'),
             ))
             ->add('link', 'text', array(

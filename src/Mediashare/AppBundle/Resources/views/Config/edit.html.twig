@@ -1,17 +1,7 @@
 {% extends "MediashareAppBundle::profile.html.twig" %}
 {% block fos_user_content %}
-    
-    <div class="login-wrap2">
-        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
-        <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/css/froala_style.min.css' rel='stylesheet' type='text/css' />
-        <!-- Include JS file. -->
-        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/js/froala_editor.min.js'></script>
-          <script>
-          $(function() {
-            $('textarea.froala-editor').froalaEditor()
-          });
-        </script>
-
+    <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+    <div class="login-wrap2">       
         <h2 class="page-header"><i class="fa fa-server"></i> Update Server {{ entity.name }} </h2>
         {{ form_start(edit_form, {'attr': {'class':'form-horizontal' }}) }}
         <fieldset>
@@ -62,4 +52,10 @@
                 {% include 'MediashareAppBundle::_infoServer.html.twig' %}
             {% endblock %}
         </div>
+
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace( 'mediashare_appbundle_config_description' );
+    </script>
     {% endblock fos_user_content %}

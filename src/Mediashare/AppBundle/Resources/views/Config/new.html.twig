@@ -1,24 +1,8 @@
 {% extends "MediashareAppBundle::profile.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block fos_user_content %}
+<script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
     <div class="login-wrap2">
-<script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/inline/ckeditor.js"></script>
-<script>
-    InlineEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
-
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
-
         {% if error %}
             <div class="alert alert-danger">
               {{error}}
@@ -27,7 +11,7 @@
         <h2 class="page-header"><i class="fa fa-plus"></i> Create your Server</h2>
         {{ form_start(form, {'attr': {'class':'form-horizontal' }}) }}
         <fieldset>
-<div id="editor">Tet</div>
+
             <div class="form-group">
                 {{ form_label(form.name) }}
                 <div class="col-lg-9">
@@ -82,4 +66,10 @@
                 {% include 'MediashareAppBundle::_infoServer.html.twig' %}
             {% endblock %}
         </div>
+       
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'mediashare_appbundle_config_description' );
+            </script>
     {% endblock fos_user_content %}
