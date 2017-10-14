@@ -121,6 +121,7 @@ class DefaultController extends Controller
         $top->setIdconfig($idconfig_json);
         $top->setIduser($iduser_json);
         $top->setPoints($total_json);
+        $top->setServername($serverName);
         $progress = 100*$total_json/100000;
 
         $top->setRanked(0);
