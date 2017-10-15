@@ -2,6 +2,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block fos_user_content %}
     <div class="login-wrap2">
+        {% if error %}
+            <div class="alert alert-danger">
+              {{error}}
+            </div>
+        {% endif %}
         <div class="intro">
             <h2 class="page-header">
             <i class="fa fa-server"></i> Servers List

@@ -27,6 +27,23 @@ class ConfigController extends Controller
 
         return $this->render('MediashareAppBundle:Config:index.html.twig', array(
             'entities' => $entities,
+            'error' => $error = null
+        ));
+    }
+
+    /**
+     * Lists all Config entities.
+     *
+     */
+    public function errorAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('MediashareAppBundle:Config')->findBy(array(),array('pointsTotal' => 'DESC'));
+        $error = "Select a Server !";
+        return $this->render('MediashareAppBundle:Config:index.html.twig', array(
+            'entities' => $entities,
+            'error' => $error,
         ));
     }
     /**

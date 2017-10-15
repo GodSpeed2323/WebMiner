@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $username = $this->getUser()->getUsername();
         $idConfig = $this->getUser()->getConfig();
         if (!$idConfig) {
-           return $this->redirect($this->generateUrl('create_server'));
+           return $this->redirect($this->generateUrl('create_server_error'));
         }
   
         return $this->render('MediashareAppBundle:Default:index.html.twig', array(
@@ -81,7 +81,7 @@ class DefaultController extends Controller
         // Get Stat User for current Server
         $top = $em->getRepository('MediashareAppBundle:Top')->findOneBy(array('idconfig' => $idConfig, 'iduser' => $idUser));
         if (!$top) {
-            $user_rank = 100;
+            $user_rank = 0;
             $total = 0;
             $progress = 0;
             $nextprogress = 100000;

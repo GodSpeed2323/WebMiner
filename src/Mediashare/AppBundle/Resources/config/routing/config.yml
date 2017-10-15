@@ -15,6 +15,10 @@ create_server_create:
     defaults: { _controller: "MediashareAppBundle:Config:create" }
     methods:  POST
 
+create_server_error:
+    path:     /error
+    defaults: { _controller: "MediashareAppBundle:Config:error" }
+
 create_server_edit:
     path:     /{id}/edit
     defaults: { _controller: "MediashareAppBundle:Config:edit" }
