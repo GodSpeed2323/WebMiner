@@ -1,16 +1,11 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
-
 {% trans_default_domain 'FOSUserBundle' %}
-
 {% block fos_user_content %}
-<div class="login-wrap" style="margin-bottom:42%;">
-  <h2>Confirmation</h2>
-
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if app.session is not empty %}
-        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
-    {% endif %}
-  </div>
-
-{% endblock fos_user_content %}
+	<div class="login-wrap" style="margin-bottom:42%;">
+		<h2>Confirmation</h2>
+		<p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+		{% if app.session is not empty %}
+			{% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+			<p><a href="{{ path('mediashare_app_homepage') }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
+		</div>
+	{% endblock fos_user_content %}
