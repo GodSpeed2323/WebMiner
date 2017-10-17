@@ -126,17 +126,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entity in users %}
-                        <tr {% if entity.connected == true %}class="success"{% else %}class="danger"{% endif %}>
-                        <td><a href="{{ path('admin_user_show_string', { 'username': entity.username }) }}">{{ entity.username }}</a></td>
-                        <td>{{ entity.classement }}</td>
-                        <td>{{ entity.points|number_format(0,',', ' ') }}</td>
-                        <td>{{ entity.ranked }}</td>
-                        <td>{% if entity.connected == true %}{{ 'Connected' }}{% else %}{{ 'Offline' }}{% endif %}</td>
+                    {% for user in users %}
+                        <tr {% if user.connected == true %}class="success"{% else %}class="danger"{% endif %}>
+                        <td><a href="{{ path('admin_user_show_string', { 'username': user.username }) }}">{{ user.username }}</a></td>
+                        <td>{{ user.classement }}</td>
+                        <td>{{ user.points|number_format(0,',', ' ') }}</td>
+                        <td>{{ user.ranked }}</td>
+                        <td>{% if user.connected == true %}{{ 'Connected' }}{% else %}{{ 'Offline' }}{% endif %}</td>
                         <td>
                             <div class="btn-group-vertical">
-                                <a href="{{ path('admin_user_show_string', {'username':entity.username}) }}" class="btn btn-primary"><i
+                                <a href="{{ path('admin_user_show_string', {'username':user.username}) }}" class="btn btn-primary"><i
                                 class="fa fa-eye"></i> Show</a>
+                                {% if app.user.hasRole("ROLE_ADMIN") or app.user.id == entity.idadmin %}
+                                 <a href="{{ path('trade_create', {'iduser': user.iduser, 'idconfig': user.idconfig}) }}" class="btn btn-danger"><i
+                                class="fa fa-money"></i> Withdraw</a>
+                                {% endif %}
                             </div>
                         </td>
                     </tr>

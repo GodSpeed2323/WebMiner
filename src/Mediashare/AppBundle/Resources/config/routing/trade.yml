@@ -1,0 +1,30 @@
+trade:
+    path:     /
+    defaults: { _controller: "MediashareAppBundle:Trade:index" }
+
+trade_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediashareAppBundle:Trade:show" }
+
+trade_new:
+    path:     /new/{idconfig}/{iduser}
+    defaults: { _controller: "MediashareAppBundle:Trade:new" }
+
+trade_create:
+    path:     /create/{idconfig}/{iduser}
+    defaults: { _controller: "MediashareAppBundle:Trade:create" }
+    methods:  [POST, GET]
+
+trade_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediashareAppBundle:Trade:edit" }
+
+trade_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediashareAppBundle:Trade:update" }
+    methods:  [POST, PUT]
+
+trade_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediashareAppBundle:Trade:delete" }
+    methods:  [POST, DELETE]

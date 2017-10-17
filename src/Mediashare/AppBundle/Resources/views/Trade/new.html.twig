@@ -1,0 +1,17 @@
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+	<div class="login-wrap2">
+		<div class="intro">
+			<h1>Trade creation</h1>
+			{{ form(form) }}
+			<ul class="record_actions">
+				<li>
+					<a href="{{ path('trade') }}">
+						Back to the list
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+{% endblock fos_user_content %}

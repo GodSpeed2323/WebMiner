@@ -1,0 +1,50 @@
+{% extends "MediashareAppBundle::profile.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+    <div class="login-wrap2">
+        <div class="intro">
+            <h1>Trade</h1>
+            <table class="record_properties">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Iduser</th>
+                        <td>{{ entity.iduser }}</td>
+                    </tr>
+                    <tr>
+                        <th>Idconfig</th>
+                        <td>{{ entity.idconfig }}</td>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
+                        <td>{{ entity.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Servername</th>
+                        <td>{{ entity.servername }}</td>
+                    </tr>
+                    <tr>
+                        <th>Amout</th>
+                        <td>{{ entity.amout }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="record_actions">
+                <li>
+                    <a href="{{ path('trade') }}">
+                        Back to the list
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('trade_edit', { 'id': entity.id }) }}">
+                        Edit
+                    </a>
+                </li>
+                <li>{{ form(delete_form) }}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock fos_user_content %}
