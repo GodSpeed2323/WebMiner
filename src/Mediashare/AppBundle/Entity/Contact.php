@@ -79,7 +79,7 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=255)
+     * @ORM\Column(name="message", type="string", length=255, nullable=true)
      */
     private $message;
 
