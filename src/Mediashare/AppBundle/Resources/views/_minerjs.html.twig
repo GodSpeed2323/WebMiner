@@ -72,7 +72,7 @@
                         var classement = htmlEncode((i + 1));
                         $('#accepted-shares').text(numberWithSpaces(balance.toLocaleString()));
                         $('#classement').text(classement.toLocaleString());
-                        if (balance > 100000) {var progress2 = 100 * (balance-nextprogress2) / nextprogress2;}else{var progress2 = 100 * balance / nextprogress2;}
+                        if (balance > 100000) {var progress2 = 100 * (balance-nextprogress2) / nextprogress2;}else{var progress2 = 100 * balance / nextprogress;}
                         //console.log(progress2);
                         if (progress2 != "" &&
                             !isNaN(progress2) &&
@@ -150,7 +150,7 @@
                         $('#accepted-shares').text(numberWithSpaces(balance.toLocaleString()));
                         $('#classement').text(numberWithSpaces(classement.toLocaleString()));
                         
-                        if (balance > 100000) {var progress2 = 100 * (balance-nextprogress2) / nextprogress2;}else{var progress2 = 100 * balance / nextprogress2;}
+                        if (balance > 100000) {var progress2 = 100 * (balance-nextprogress2) / nextprogress2;}else{var progress2 = 100 * balance / nextprogress;}
                         console.log(progress2);
                         if (progress2 != "" &&
                             !isNaN(progress2) &&

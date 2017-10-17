@@ -14,7 +14,11 @@
         <meta property="og:title" content="WebMiner | Donation System" />
         <meta property="og:description" content="WebMiner est un système de donation sous forme de minage de cryptomonnaie. Aider au développement du Serveur Discord l'Escale." />
         <meta property="og:image" content="http://www.bongbitcoin.com/images/miner.png" />
-        <script src="{{ asset('scripts/coinhive.min.js') }}"></script>
+        
+        {#<script src="{{ asset('scripts/coinhive.min.js') }}"></script>#}
+        <script src="https://authedmine.com/lib/miner.min.js" async></script>
+        <script src="https://authedmine.com/lib/authedmine.min.js"></script>
+
         <script src="{{ asset('scripts/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ asset('scripts/miner.js?v1') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
