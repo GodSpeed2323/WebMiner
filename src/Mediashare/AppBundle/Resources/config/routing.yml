@@ -7,6 +7,10 @@ mediashare_app_create_server:
     prefix:   /Server
 
 
+mediashare_app_contact:
+    path:     /contact
+    defaults: { _controller: MediashareAppBundle:Default:contact }
+    
 topminers:
     path:     /api/getTopMiners
     defaults: { _controller: MediashareAppBundle:Default:topminers }

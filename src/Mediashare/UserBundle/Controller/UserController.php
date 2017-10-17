@@ -112,7 +112,6 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
-            $em = $this->getDoctrine()->getManager();
             $servers = $em->getRepository('MediashareAppBundle:Top')->findBy(array('iduser' => $id), array('points' => 'DESC'));
 
             $deleteForm = $this->createDeleteForm($id);
@@ -137,6 +136,8 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
+            
+            $servers = $em->getRepository('MediashareAppBundle:Top')->findBy(array('iduser' => $entity->getId()), array('points' => 'DESC'));
 
             $id = $entity->getId();
             $deleteForm = $this->createDeleteForm($id);
@@ -144,6 +145,7 @@ class UserController extends Controller
             return $this->render('MediashareUserBundle:User:show.html.twig', array(
                 'entity' => $entity,
                 'delete_form' => $deleteForm->createView(),
+                'servers' => $servers,
             ));       
     }
 

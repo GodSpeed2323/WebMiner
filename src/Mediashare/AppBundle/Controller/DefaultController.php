@@ -5,6 +5,7 @@ namespace Mediashare\AppBundle\Controller;
 use Doctrine\Common\Persistence\Mapping\MappingException;
 use Mediashare\AppBundle\Entity\Top;
 use Mediashare\AppBundle\Entity\Contact;
+use Mediashare\AppBundle\Form\ContactType;
 use Mediashare\AppBundle\Entity\Config;
 use Mediashare\UserBundle\Entity\User;
 use Mediashare\AppBundle\Sitemap\Url;
@@ -329,6 +330,64 @@ class DefaultController extends Controller
     {
         return $this->render('MediashareAppBundle::_maintenance.html.twig');
     }
+
+    /**
+     * Page Contact
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function contactAction(Request $request)
+    {
+        $captchaKey = $this->container->getParameter('captchaKey');
+        $entity = new Contact();
+        $form = $this->createForm(new ContactType(), $entity, array(
+            'method' => 'POST',
+        ));
+        $idConfig = $this->getUser()->getConfig();
+
+        $form->add('submit', 'submit',
+        array(
+            'label' => 'Ajouter',
+            'attr' => array('class' => 'btn btn-success')
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            if (isset($_POST['g-recaptcha-response'])) {
+                $captcha = $_POST['g-recaptcha-response'];
+            }
+            if ($captcha) {
+                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$captchaKey."&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
+                if ($response == false) {
+                    return $this->redirectToRoute('mediashare_app_contact');
+                } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($entity);
+                    $em->flush();
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Contact site')
+                        ->setFrom($entity->getEmail())
+                        ->setTo($this->container->getParameter('mail_to'))
+                        ->setBody($this->renderView('MediashareAppBundle:Mail:contact.html.twig', array(
+                            'entity' => $entity
+                        )))
+                        ->setContentType('text/html');
+                    $this->get('mailer')->send($message);
+
+                    return $this->redirect($this->generateUrl('mediashare_app_thanks'));
+                }
+            }
+        }
+        return $this->render('MediashareAppBundle:Default:contact.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'captchaKey' => $captchaKey,
+            'idConfig' => $idConfig
+        ));
+
+    }
+
 
     /**
      * return the sitemeap with out xml encoding

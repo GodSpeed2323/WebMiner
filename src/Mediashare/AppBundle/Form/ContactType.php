@@ -16,34 +16,24 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('lastname', 'text', array(
-                "label" => "Nom : * "
-            ))
-            ->add('firstname', 'text', array(
-                "label" => "Prénom :",
-                "required" => false
-            ))
-            ->add('phone', 'text', array(
-                "label" => "Téléphone :",
-                "required" => false
+                "label" => "Name : * ",
+                'required' => true,
+                'attr' => array('class' => 'form-control'),
+                'label_attr' => array('class' => 'col-lg-2 control-label'),
             ))
             ->add('email', 'text', array(
-                "label" => "Email : * "
-            ))
-            ->add('address', 'text', array(
-                "label" => "Adresse :",
-                "required" => false
-            ))
-            ->add('zipCode', 'text', array(
-                "label" => "Code postal :",
-                "required" => false
-            ))
-            ->add('city', 'text', array(
-                "label" => "Ville :",
-                "required" => false
+                "label" => "Email : * ",
+                'required' => true,
+                'attr' => array('class' => 'form-control'),
+                'label_attr' => array('class' => 'col-lg-2 control-label'),
             ))
             ->add('message', 'textarea', array(
-                "label" => "Message : * "
-            ));
+                "label" => "Message : * ",
+                'required' => true,
+                'attr' => array('class' => ''),
+                'label_attr' => array('class' => 'col-lg-2 control-label'),
+            ))
+            ;
     }
 
     /**
