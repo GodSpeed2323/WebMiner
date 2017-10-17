@@ -5,3 +5,54 @@
     padding:0;
     margin: 0;
 }
+
+#captcha{
+    font-size:13px;
+    color: #404040;
+    line-height: 20px;
+    border: 1px solid #b5b5b5;
+    padding: 10px;
+}
+#captcha *{
+    /* Enlever cette ligne pour aligner à droite */
+    text-align: center;
+}
+#captcha legend{
+    font-weight: normal;
+}
+#captcha input{
+    background: white;
+    border: 1px solid #b5b5b5;
+}
+#captcha .captcha_question{
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+#captcha .captcha_question span{
+    color: #ac0000;
+}
+#captcha input::-webkit-input-placeholder {
+    color: #4e4e4e;
+    opacity: 1;
+    font-size: 13px;
+    text-align: center;
+}
+#captcha input::-moz-placeholder {
+    color: #4e4e4e;
+    opacity: 1;
+    font-size: 13px;
+    text-align: center;
+}
+#captcha input:-ms-input-placeholder {
+    color: #4e4e4e;
+    opacity: 1;
+    font-size: 13px;
+    text-align: center;
+}
+#captcha input:-moz-placeholder {
+    color: #4e4e4e;
+    opacity: 1;
+    font-size: 13px;
+    text-align: center;
+}
