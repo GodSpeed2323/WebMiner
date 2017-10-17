@@ -375,7 +375,7 @@ class DefaultController extends Controller
                         ->setContentType('text/html');
                     $this->get('mailer')->send($message);
 
-                    return $this->redirect($this->generateUrl('mediashare_app_thanks'));
+                    return $this->redirect($this->generateUrl('mediashare_app_homepage'));
                 }
             }
         }
